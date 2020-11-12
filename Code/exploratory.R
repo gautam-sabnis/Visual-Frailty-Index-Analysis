@@ -7,6 +7,39 @@ ellipsefit <- read.csv(snakemake@input[[2]], header = TRUE, stringsAsFactors = F
 rearpaw <- read.csv(snakemake@input[[3]], header = TRUE, stringsAsFactors = FALSE) 
 var_agingall <- read.csv(snakemake@input[[4]], header = TRUE, stringsAsFactors = FALSE) 
 
+#aging <- read.csv('Data/completeagedb6.csv',header = TRUE, stringsAsFactors = FALSE)
+#ellipsefit <- read.csv('Data/ellipsefit_all.csv',header = TRUE, stringsAsFactors = FALSE) 
+#rearpaw <- read.csv('Data/rearpaw.csv',header = TRUE, stringsAsFactors = FALSE)
+#var_agingall <- read.csv('Data/var_agingall.csv',header = TRUE, stringsAsFactors = FALSE)
+#master <- read.csv('Data/masterdf.csv',header = TRUE, stringsAsFactors = FALSE)
+#masterdf <- master[, !(names(master) %in% c('Animal_x','Animal_x.1','Animal_y','Unnamed..6',
+#'Unnamed..7')]
+#names(masterdf)[names(masterdf) == 'Overall.Score'] <- 'score'
+#names(masterdf)[names(masterdf) == 'Animal'] <- 'MouseID'
+#names(masterdf)[names(masterdf) == 'Age.at.Test'] <- 'TestAge' 
+#names(masterdf)[names(masterdf) == 'Body.Weight'] <- 'Weight' 
+#names(masterdf)[names(masterdf) == 'Collected.By'] <- 'Tester' 
+#names(masterdf)[names(masterdf) == 'dAC_standard.deviation'] <- 'dAC_stdev'
+#names(masterdf)[names(masterdf) == 'dB_standard_deviation'] <- 'dB_stdev'
+#names(masterdf)[names(masterdf) == 'aABC_standard_deviation'] <- 'aABC_stdev'
+
+masterdfgaitfix <- read.csv('Data/New/masterdfgaitfix.csv', header=TRUE, stringsAsFactors=FALSE)
+fixedflex <- read.csv('Data/New/fixedflex.csv', header=TRUE, stringsAsFactors=FALSE)
+ellipsefit <- read.csv('Data/New/ellipsefit_all.csv', header=TRUE, stringsAsFactors=FALSE)
+fixedflex$NetworkFilename <- ellipsefit$NetworkFilename
+rearpaw <- read.csv('Data/New/rearpaw.csv', header=TRUE, stringsAsFactors=FALSE)
+rear4all <- read.csv('Data/New/rear4all.csv', header=TRUE, stringsAsFactors=FALSE)
+rear4bins <- read.csv('Data/New/rear4bins.csv', header=TRUE, stringsAsFactors=FALSE)
+df_old <- Reduce(function(...) merge(...,by='NetworkFilename'), list(masterdfgaitfix,fixedflex,ellipsefit,rearpaw,rear4all,rear4bins))
+names(df_old)[names(df_old) == 'MouseID.x'] <- 'MouseID'
+
+masterdf <- read.csv('Data/New/masterdf.csv',header=TRUE, stringsAsFactors=FALSE)
+rearpaw_new <- read.csv('Data/New/rearpaw_new.csv',header=TRUE, stringsAsFactors=FALSE)
+df_new <- merge(masterdf,rearpaw_new, by='NetworkFilename')
+
+common_cols <- intersect(colnames(df_old), colnames(df_new))
+df0 <- rbind(df_old[,names(df_old) %in% common_cols], df_new[,names(df_new) %in% common_cols])
+
 frailty_parameters <- c('Alopecia','Loss.of.fur.colour','Dermatitis','Loss.of.whiskers','Coat.condition',
 	'Piloerection','Cataracts','Eye.discharge.swelling','Microphthalmia','Corneal.opacity','Nasal.discharge',
 	'Rectal.prolapse','Vaginal.uterine.','Diarrhea','Vestibular.disturbance','Vision.loss..Visual.Placing.',
@@ -35,13 +68,26 @@ iqr_gait_measures_linear <- c('angular_velocity_iqr','base_tail_lateral_displace
 OFA_measures <- c('stride_count','Distance.cm.sc','center_time_secs','periphery_time_secs','corner_time_secs',
 	'center_distance_cm','periphery_distance_cm','corner_distance_cm','grooming_number_bouts',
 	'grooming_duration_secs')
+
+rearpaw_pose_measures <- c('median_rearpaw')
+rears_measures <- c('rear_count','rears_0_5','rears_0_10')
+ellipsefit_measures <- c('median_width', 'median_length')
 engineered_features_mean <- c('dAC_mean','dB_mean','aABC_mean')
 engineered_features_stdev <- c('dAC_stdev','dB_stdev','aABC_stdev')
 engineered_features_min <- c('dAC_min','dB_min','aABC_min')
 engineered_features_max <- c('dAC_max','dB_max','aABC_max')
+engineered_features_median <- c('dAC_median','dB_median','aABC_median')
 
 
-aging <- cbind(aging, ellipsefit[1:nrow(aging),],rearpaw[1:nrow(aging),],var_agingall) 
+df <- df0[,names(df0) %in% c('Overall.Score',avg_gait_measures_linear, median_gait_measures_linear, std_gait_measures_linear,
+iqr_gait_measures_linear, OFA_measures, engineered_features_median, ellipsefit_measures, rearpaw_pose_measures,
+rears_measures)]
+df <- df[complete.cases(df),]
+
+
+
+#aging <- cbind(aging, ellipsefit[1:nrow(aging),],rearpaw[1:nrow(aging),],var_agingall) 
+aging <- df0
 names(aging)[names(aging) == 'Overall.Score'] <- 'score' 
 names(aging)[names(aging) == 'Age.at.Test'] <- 'TestAge' 
 names(aging)[names(aging) == 'Body.Weight'] <- 'Weight' 
@@ -57,14 +103,15 @@ aging <- aging[, !duplicated(colnames(aging))]
 #p3: Scatterplot of CFI (adjusted for Tester effect) vs Age. 
 #p4: Boxplot of adjusted CFIs at each age value. 
 
-p1 <- ggplot(aging, aes(x = (TestAge), y = score)) + geom_point(alpha = 0.8, size = 3) + 
-geom_smooth(aes(color = Tester), method = 'lm', se = FALSE) + 
-scale_color_manual(values = c('#ff6600','#008000', '#407294','#ffd700')) + labs(x = 'TestAge', y = 'CFI') +  
-scale_x_continuous("Age", labels = as.character(c(20,40,60,80,100,120,140)), 
-	breaks = c(20,40,60,80,100,120,140)) + theme_bw(base_size = 18) + theme(legend.position = 'none')
+p1 <- ggplot(aging, aes(x = (TestAge), y = score)) + geom_jitter(aes(color = Sex), alpha = 0.7, size = 2, stroke=1) + 
+scale_color_manual(values=c("#ff6600", "#377EB8")) + geom_smooth(method = 'lm', se = TRUE, color='black',
+	linetype='dashed') + labs(x = 'TestAge', y = 'CFI') +  scale_x_continuous("Age", labels = as.character(c(20,40,60,80,100,120,140)), 
+	breaks = c(20,40,60,80,100,120,140)) + theme_bw(base_size = 18) + theme(legend.position=c(.13,.9),
+	legend.background = element_blank()) + 
+	ggtitle(paste0('r = ',round(cor(aging$score, aging$TestAge),2)))
 
 p1 <- ggplot(aging, aes(x = (TestAge), y = score, color = Tester)) + geom_point(alpha = 0.7, size = 2) +  
-stat_summary(fun="mean", geom="line", size=1)
+stat_summary(fun="mean", geom="line", size=1) + 
 scale_color_manual(values = c('#ff6600','#008000', '#407294','#ffd700')) + labs(x = 'TestAge', y = 'CFI') +  
 scale_x_continuous("Age", labels = as.character(c(20,40,60,80,100,120,140)), 
 	breaks = c(20,40,60,80,100,120,140)) + theme_bw(base_size = 18)
@@ -74,10 +121,47 @@ p2 <- ggplot(aging, aes(x = as.factor(TestAge), y = score)) + geom_boxplot() +
 geom_point(aes(color = Tester), alpha = 0.8, size = 3) + 
 scale_color_manual(values = c('#ff6600','#008000', '#407294','#ffd700')) + 
 labs(x = 'TestAge', y = 'CFI') + theme_bw(base_size = 18) + 
-theme(legend.position = 'none',axis.text.x = element_text(angle = 45, vjust = 0.5))
+theme(legend.position = 'top',axis.text.x = element_text(angle = 45, vjust = 0.5))
 
 mod.lmm <- lmer(score ~ TestAge + Sex + Weight + (1|Tester), data = aging) 
-aging$score <- predict(mod.lmm, type = 'response', re.form =~ 0, random.only = FALSE)
+
+aging$scoreGC <- ifelse(aging$Tester == 'Scorer1', aging$score - ranef(mod.lmm)$Tester[1,],
+	ifelse(aging$Tester == 'Scorer2', aging$score - ranef(mod.lmm)$Tester[2,],
+	ifelse(aging$Tester == 'Scorer3', aging$score - ranef(mod.lmm)$Tester[3,], 
+	aging$score - ranef(mod.lmm)$Tester[4,])))
+
+#aging$scoreGS <- predict(mod.lmm, type = 'response', re.form =~ 0, random.only = FALSE)
+
+score.df <- data.frame(score = aging$score, GC = aging$scoreGC,Tester = aging$Tester, TestAge = aging$TestAge)
+
+ggplot(score.df, aes(x = TestAge, y = GC)) + geom_jitter(size = 3, width = 0.5, stroke = 1,alpha=0.6,aes(color=Tester)) + 
+stat_smooth(method = 'lm',color='black',linetype = 'dashed') + 
+scale_color_brewer(palette="Dark2") + labs(x = 'TestAge', y = TeX('$CFI_{adj}$')) + theme_bw(base_size = 22) + 
+theme(legend.position = 'top')
+ggsave('Plots3/Fig1.jpg', width = 9, height = 9)
+
+
+df1 <- aging[,names(aging) %in% c(avg_gait_measures_linear, median_gait_measures_linear, std_gait_measures_linear, iqr_gait_measures_linear,
+	OFA_measures, engineered_features_median, ellipsefit_measures, rearpaw_pose_measures, rears_measures)]
+df1 <- cbind(score = score.df$GC, df1)
+corr.df <- data.frame(feature = names(df1[,-1]), corr = as.numeric(apply(df1[,-which(names(df1) %in% c('score'))], 
+	2, function(x) cor(df1$score,x, use="complete.obs"))))
+corr.df$Type <- ifelse(corr.df$feature %in% c(avg_gait_measures_linear, median_gait_measures_linear, std_gait_measures_linear, 
+	iqr_gait_measures_linear), 'Gait',
+	ifelse(corr.df$feature %in% c(OFA_measures), 'OFA', 'Engineered'))
+ggplot(corr.df, aes(x = seq(1,60), y = abs(corr), color = Type)) + geom_point(size = 3, stroke = 1, alpha = 0.8) + 
+labs(x = 'Feature', y = 'Correlation') + scale_color_brewer(palette="Dark2") + theme_bw(base_size = 22) + 
+theme(legend.position = 'top')
+ggsave('Plots3/Fig2.jpg', width = 9, height = 9)
+
+tmp <- c(as.character(corr.df[abs(corr.df$corr) >= 0.4,'feature']))
+corrplot::corrplot(cor(df1[,names(df1) %in% tmp],use="complete.obs"), order = "hclust", 
+	tl.col = 'black',type = 'upper', tl.cex = 0.7)
+dev.print(pdf,'Plots3/Fig3.pdf', width = 9, height = 9)
+
+
+
+
 
 p3 <- ggplot(aging, aes(x = (TestAge), y = score)) + geom_point(alpha = 0.8, size = 3) +
 geom_smooth(aes(color = Tester), method = 'lm', se = FALSE) +
@@ -150,7 +234,7 @@ for (f in 1:length(frailty_parameters)){
 	}
 }
 tmp[is.na(tmp)] <- 0 	
-data <- do.call(rbind,lapply(1:length(frailty_parameters), function(f) melt(t(tmp[,,f]))))
+data <- do.call(rbind,lapply(1:length(frailty_parameters), function(f) reshape::melt(t(tmp[,,f]))))
 data <- cbind(Age = rep(rep(Age,each = 3), 27), data)
 data <- data[, -which(names(data) %in% c("X2"))]
 data <- cbind(Frailty_parameters = rep(frailty_parameters, each = 96), data)

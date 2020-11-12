@@ -60,3 +60,11 @@ iqr_gait_measures_linear + OFA_measures + engineered_features_mean + engineered_
 'median_width', 'median_length']]
 
 df.to_csv(snakemake.output[0], index = False)
+
+
+master = master.rename(columns = {'Overall Score':'score','Age at Test':'TestAge','Body Weight':'Weight','Distance cm/sc':'Distance',
+	'Collected By':'Tester'})
+master['Tester'] = master['Tester'].astype('category')
+master = master[['score'] + avg_gait_measures_linear + median_gait_measures_linear + std_gait_measures_linear + 
+iqr_gait_measures_linear + OFA_measures + engineered_features_mean + engineered_features_stdev + ['median_rearpaw',  
+'median_width', 'median_length']]

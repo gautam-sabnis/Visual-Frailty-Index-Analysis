@@ -6,7 +6,7 @@ from sklearn.svm import SVR
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split, RepeatedKFold, GridSearchCV, cross_val_score
 from sklearn.pipeline import Pipeline, make_pipeline
-from sklearn.metrics import mean_absolute_error as mae
+from sklearn.metrics import mean_absolute_error
 
 from bayes_opt import BayesianOptimization
 from skopt import BayesSearchCV
@@ -26,7 +26,7 @@ CV = RepeatedKFold(n_splits = 10, n_repeats = 1, random_state=1234)
 
 #LinearModel with Elastic Net
 #Tuning Elastic Net:Grid Search
-pipe = make_pipeline(StandardScaler(), ElasticNet())
+pipe = make_pipeline(StandardScaler(), ElasticNet(max_iter = 10000))
 enet_grid = [{'elasticnet__alpha':np.linspace(0.008,0.009,20), 'elasticnet__l1_ratio':np.linspace(0.01,1,10)}]
 enet_search = GridSearchCV(pipe, param_grid = enet_grid, cv = CV, 
 	scoring = 'neg_mean_absolute_error', return_train_score = True, n_jobs= -1)
