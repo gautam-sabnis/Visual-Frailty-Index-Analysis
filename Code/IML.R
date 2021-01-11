@@ -130,7 +130,7 @@ Ytest <- dfTest[,'score']
 #	vi_list[[j]] <- iml::FeatureImp$new(predictor, loss = "mae")
 #}
 
-quantiles <- c(0.025,0.50,0.975)
+quantiles <- c(0.30,0.50,0.60)
 vi_list <- list()
 for (j in 1:3){
 	modelGRF60 <- grf::quantile_forest(Xtrain, Ytrain, quantiles = quantiles[j], 
@@ -138,13 +138,23 @@ for (j in 1:3){
 	vi_list[[j]] <- grf::variable_importance(modelGRF60)
 }
 
+#Comparing Q025,Mean,Q975
+modelGRF60 <- grf::quantile_forest(Xtrain, Ytrain, quantiles = quantiles[1], 
+	honesty=FALSE)
+vi_list[[1]] <- grf::variable_importance(modelGRF60)
+modelGRF60 <- grf::regression_forest(Xtrain, Ytrain, tune.parameters = 'all',honesty=FALSE)
+vi_list[[2]] <- grf::variable_importance(modelGRF60)
+modelGRF60 <- grf::quantile_forest(Xtrain, Ytrain, quantiles = quantiles[3], 
+	honesty=FALSE)
+vi_list[[3]] <- grf::variable_importance(modelGRF60)
+
 A <- ggcorrplot(round(cor(Xtrain),1)[,ncol(Xtrain):1],
 	lab=TRUE,type='upper',ggtheme=theme_bw(base_size=18), tl.cex=18)
 
 #df.tmp <- rbind(vi_list[[1]]$results[,c(1,3)],vi_list[[2]]$results[,c(1,3)],vi_list[[3]]$results[,c(1,3)])
 df.tmp <- data.frame(importance = do.call(rbind,vi_list)) 
-df.tmp$feature <- names(Xtest)
-df.tmp$Quantile <- factor(rep(c('Q025','M','Q975'), each=38)) 
+df.tmp$feature <- colnames(Xtest)
+df.tmp$Quantile <- factor(rep(c('Q025','M','Q975'), each=39)) 
 df.tmp$Quantile <- factor(df.tmp$Quantile, levels = c('Q025','M','Q975'))
 
 

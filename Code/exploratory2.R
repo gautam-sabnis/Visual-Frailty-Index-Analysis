@@ -176,3 +176,4 @@ df.melt <- reshape::melt(df[,-3]) #remove score
 df.melt <- cbind(df.melt, Score = rep(df$score,ncol(df)-1))
 ggplot(df.melt, aes(x = value, y = Score)) + geom_point() + stat_smooth(method = 'loess') + 
 facet_wrap(~variable, scales = 'free')
+

@@ -196,7 +196,7 @@ invisible(sapply(seq(length(unique(df.5$MouseID))), function(x) {
 	}
 	}))
 
-#df <- merge(df[,names(df)%in%c('MouseID','TestAge','Weight','score','Sex',
+#df <- merge(df[,names(df)%in%c('MouseID','score','Sex',
 #	median_gait_measures_linear, iqr_gait_measures_linear, OFA_measures, engineered_features_median, 
 #	ellipsefit_measures, rearpaw_pose_measures,rears_measures)],
 #	df.5[,names(df.5) %in% c('MouseID','TestAge')],by=c('MouseID','TestAge'),all.y=TRUE)
@@ -394,8 +394,9 @@ scale_color_manual(values=c('#1f78b4','#e7298a','#525252')) + theme_bw(base_size
 theme(legend.position='top')
 
 Pr60 <- ggplot(df.pred60, aes(x = seq(nrow(df.pred60)), y = Median, ymin=Q025, ymax=Q975)) + 
-	geom_point(aes(y=True), size = 2) + geom_point(cex = 0.5) + geom_pointrange(color = "#D55E00") + theme_bw(base_size=18) + 
-	labs(x='Animals',y='Score') + scale_x_discrete(breaks=c(50,100,length(Ytest)), labels=c(50,100,length(Ytest)))
+	geom_point(aes(y=True), size = 1, color='#377eb8') + geom_point(color = '#969696') + geom_pointrange(color = '#969696',alpha = 0.6) + theme_bw(base_size=18) + 
+	labs(x='Test Set Index',y='Score') + 
+	scale_y_discrete(breaks=c(2,4,6,8,10,12), labels=c(2,4,6,8,10,12),drop=FALSE)
 #geom_point(aes(y=Mean), size = 1, color = 'blue')
 dev.print(pdf,'Temp/pred-int.pdf', width=12, height = 3)
 ggplot(df.tmp.melt, aes(x=value,color=variable)) + geom_histogram(bins=6)
@@ -524,3 +525,69 @@ ALE5 <- ggplot(df.ALE.melt5, aes(x = x, y = value, col = variable)) + geom_point
 ALE60|ALE20|ALE5
 
 
+##########
+Features <- c('Center Time','Periphery Time','Corner Time','Center Distance',
+	'Periphery Distance','Corner Distance','Grooming Bouts','Grooming Duration','Angular Velocity',
+	'Base Tail LD','Limb Duty Factor','Nose LD','Speed','Step Length1','Step Length2','Step Width',
+	'Stride Length','Tip Tail LD','Distance','Angular Velocity IQR','Base Tail LD IQR','Limb Duty Factor IQR',
+	'Nose LD IQR','Speed IQR','Step Length1 IQR','Step Length2 IQR','Step Width IQR','Stride Length IQR',
+	'Tip Tail LD IQR','dAC','dB','aABC','Width','Length','Rearpaw','Rearcount') 
+#60mins
+vi_list <- list()
+i <- which.min(metrics60$'Median MAE')
+tmp <- data.frame(MouseID = unique(df$MouseID), id = splits[[i]])
+dfTrain <- df[df$MouseID %in% tmp$MouseID[tmp$id<3],]
+dfTest <- df[df$MouseID %in% tmp$MouseID[tmp$id==3],]
+dfTrain <- dfTrain[,-1] #Remove MouseID
+dfTest <- dfTest[,-1] #Remove MouseID
+
+Xtrain <- dfTrain[,-which(names(dfTrain) %in% c('score','Sex'))]
+Xtest <- dfTest[,-which(names(dfTest) %in% c('score','Sex'))]
+Ytrain <- dfTrain[,'score']
+Ytest <- dfTest[,'score']
+model <- grf::regression_forest(Xtrain, Ytrain, tune.parameters = 'all',honesty=FALSE)
+
+vi_list[[1]] <- grf::variable_importance(model)
+
+i <- which.min(metrics20$'Median MAE')
+tmp <- data.frame(MouseID = unique(df$MouseID), id = splits[[i]])
+dfTrain <- df[df$MouseID %in% tmp$MouseID[tmp$id<3],]
+dfTest <- df[df$MouseID %in% tmp$MouseID[tmp$id==3],]
+dfTrain <- dfTrain[,-1] #Remove MouseID
+dfTest <- dfTest[,-1] #Remove MouseID
+
+Xtrain <- dfTrain[,-which(names(dfTrain) %in% c('score','Sex'))]
+Xtest <- dfTest[,-which(names(dfTest) %in% c('score','Sex'))]
+Ytrain <- dfTrain[,'score']
+Ytest <- dfTest[,'score']
+model <- grf::regression_forest(Xtrain, Ytrain, tune.parameters = 'all',honesty=FALSE)
+
+vi_list[[2]] <- grf::variable_importance(model)
+
+i <- which.min(metrics5$'Median MAE')
+tmp <- data.frame(MouseID = unique(df$MouseID), id = splits[[i]])
+dfTrain <- df[df$MouseID %in% tmp$MouseID[tmp$id<3],]
+dfTest <- df[df$MouseID %in% tmp$MouseID[tmp$id==3],]
+dfTrain <- dfTrain[,-1] #Remove MouseID
+dfTest <- dfTest[,-1] #Remove MouseID
+
+Xtrain <- dfTrain[,-which(names(dfTrain) %in% c('score','Sex'))]
+Xtest <- dfTest[,-which(names(dfTest) %in% c('score','Sex'))]
+Ytrain <- dfTrain[,'score']
+Ytest <- dfTest[,'score']
+model <- grf::regression_forest(Xtrain, Ytrain, tune.parameters = 'all',honesty=FALSE)
+
+vi_list[[3]] <- grf::variable_importance(model)
+
+df.tmp <- data.frame(importance = do.call(rbind,vi_list)) 
+df.tmp <- df.tmp[-c(1,2,39,40,77,78),]
+df.tmp <- data.frame(importance = df.tmp)
+df.tmp$feature <- Features
+df.tmp$TimeBin <- factor(rep(c('60mins','20mins','5mins'), each=36)) 
+df.tmp$TimeBin <- factor(df.tmp$TimeBin, levels = c('5mins','20mins','60mins'))
+ggplot(df.tmp, aes(x=feature,y=importance,fill=TimeBin)) + 
+geom_bar(stat='identity',position='dodge') +  
+theme_bw(base_size=22) + labs(x = 'Feature', y = 'Importance') + 
+scale_fill_manual(name = "TimeBin", values = c('#e41a1c','#377eb8','#4daf4a')) + 
+theme(axis.text.x=element_text(angle=90,vjust=0.5,hjust=1),legend.position='top')
+dev.print(pdf,'Temp/var-imp-duration.pdf',width=16,height=7)
