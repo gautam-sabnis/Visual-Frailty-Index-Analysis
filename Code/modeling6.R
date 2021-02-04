@@ -96,7 +96,7 @@ labs(x = 'Feature', y = 'Absolute Correlation') + scale_color_manual(values=c('#
 theme_bw(base_size = 18) + theme(legend.position = 'none')
 
 set.seed(1234)
-nsim <- 20
+nsim <- 50
 quantiles <- c(0.5) #seq(0.1,0.9,length=9)
 help <- rep(1:3,c(251,100,100)) #since length(unique(df$MouseID)) = 403
 splits <- lapply(seq(nsim), function(x) sample(help))
@@ -252,9 +252,15 @@ facet_wrap(~Metric, scales='free',labeller=label_parsed)
 
 
 ############
-tmp1 <- read.csv('Data/Results/Age-MAE.csv',header=TRUE)
-tmp2 <- read.csv('Data/Results/Age-RMSE.csv',header=TRUE)
-tmp3 <- read.csv('Data/Results/Age-R2.csv',header=TRUE)
+#tmp1 <- read.csv('Data/Results/Age-MAE.csv',header=TRUE)
+#tmp2 <- read.csv('Data/Results/Age-RMSE.csv',header=TRUE)
+#tmp3 <- read.csv('Data/Results/Age-R2.csv',header=TRUE)
+
+tmp1 <- read.csv('Data/Age-MAE.csv',header=TRUE)
+tmp2 <- read.csv('Data/Age-RMSE.csv',header=TRUE)
+tmp3 <- read.csv('Data/Age-R2.csv',header=TRUE)
+
+
 
 MAE.melt <- reshape::melt(tmp1[,-1])
 RMSE.melt <- reshape::melt(tmp2[,-1])
@@ -265,9 +271,9 @@ df.metrics$Metric <- rep(c('MAE','RMSE','R2'), each=200)
 df.metrics$Metric <- factor(df.metrics$Metric, levels = c('MAE','RMSE','R2'))
 levels(df.metrics$Metric) <- c('MAE','RMSE','R^2')
 levels(df.metrics$variable) <- c('LR*','SVM','RF','XGB')
-p1 <- ggplot(df.metrics,aes(x = variable, y = value)) + geom_point(alpha = 0.5) + geom_boxplot(fill = '#e41a1c', alpha = 0.7) + 
+p1 <- ggplot(df.metrics,aes(x = variable, y = value)) + geom_boxplot(fill = '#e41a1c', alpha = 0.7) + geom_point(alpha = 0.5) + 
 labs(x='Model',y='Metric (weeks)') + theme_bw(base_size=18) + 
-facet_wrap(~Metric, scales='free',labeller=label_parsed)
+facet_wrap(~Metric, scales='free',labeller=label_parsed) + theme(axis.text.x = element_text(size=20), axis.text.y = element_text(size=20), axis.title.x = element_text(size = 20), axis.title.y=element_text(size=20))
 
 #aov <- aov(value ~ variable, data=MAE.melt)
 #summary(aov) 
@@ -293,9 +299,13 @@ R2.melt$sim <- rep(1:50,4)
 tmp <- lmer(value ~ variable + (1|sim), data = R2.melt)
 anova(tmp)
 
-tmp1 <- read.csv('Data/Results/FI-MAE.csv',header=TRUE)
-tmp2 <- read.csv('Data/Results/FI-RMSE.csv',header=TRUE)
-tmp3 <- read.csv('Data/Results/FI-R2.csv',header=TRUE)
+#tmp1 <- read.csv('Data/Results/FI-MAE.csv',header=TRUE)
+#tmp2 <- read.csv('Data/Results/FI-RMSE.csv',header=TRUE)
+#tmp3 <- read.csv('Data/Results/FI-R2.csv',header=TRUE)
+
+tmp1 <- read.csv('Data/FI-MAE.csv',header=TRUE)
+tmp2 <- read.csv('Data/FI-RMSE.csv',header=TRUE)
+tmp3 <- read.csv('Data/FI-R2.csv',header=TRUE)
 
 MAE.melt <- reshape::melt(tmp1[,-1])
 RMSE.melt <- reshape::melt(tmp2[,-1])
@@ -306,9 +316,10 @@ df.metrics$Metric <- rep(c('MAE','RMSE','R2'), each=200)
 df.metrics$Metric <- factor(df.metrics$Metric, levels = c('MAE','RMSE','R2'))
 levels(df.metrics$Metric) <- c('MAE','RMSE','R^2')
 levels(df.metrics$variable) <- c('LR*','SVM','RF','XGB')
-p2 <- ggplot(df.metrics,aes(x = variable, y = value)) + geom_point(alpha = 0.5) + geom_boxplot(fill = '#377eb8', alpha = 0.7) + 
+p2 <- ggplot(df.metrics,aes(x = variable, y = value)) + geom_boxplot(fill = '#377eb8', alpha = 0.7) + 
+geom_point(alpha = 0.5) + 
 labs(x='Model',y='Metric') + theme_bw(base_size=18) + 
-facet_wrap(~Metric, scales='free',labeller=label_parsed)
+facet_wrap(~Metric, scales='free',labeller=label_parsed) + theme(axis.text.x = element_text(size=20), axis.text.y = element_text(size=20), axis.title.x = element_text(size = 20), axis.title.y=element_text(size=20))
 
 #aov <- aov(value ~ variable, data=MAE.melt)
 #summary(aov) 
@@ -498,7 +509,7 @@ facet_wrap(~Metric, scales='free',labeller=label_parsed)
 
 
 #####Legends#####
-df.tmp <- data.frame(value = c(-1,1), Type = c('Age','Frailty'))
+df.tmp <- data.frame(value = c(-1,1), Type = c('Age','FI Score'))
 p0 <- ggplot(df.tmp,aes(y=value,x=Type,color=Type)) + geom_point() + 
 scale_color_manual(values=c('#e41a1c','#377eb8')) + theme_bw(base_size=18) + 
 theme(legend.title=element_blank(),legend.position='top') + 
@@ -506,6 +517,7 @@ guides(color = guide_legend(override.aes = list(size = 5)))
 legend <- cowplot::get_legend(p0)
 grid.newpage()
 grid.draw(legend)
+dev.print(pdf,'Temp3/1B.pdf',width=2.82,height=0.75)
 
 df.tmp <- data.frame(value = c(-1,0,1), Type = c('Gait','OFA','Engineered'))
 df.tmp$Type <- factor(df.tmp$Type, values = c('Gait','OFA','Engineered'))

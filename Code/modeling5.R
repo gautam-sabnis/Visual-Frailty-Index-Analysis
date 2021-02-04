@@ -206,8 +206,8 @@ invisible(sapply(seq(length(unique(df.5$MouseID))), function(x) {
 #	ellipsefit_measures_20, rearpaw_pose_measures_20,rears_measures_20)],
 #	df.5[,names(df.5) %in% c('MouseID','TestAge')],by=c('MouseID','TestAge'),all.y=TRUE)
 
-ggplot(df,aes(x=score)) + geom_density(lwd=1.2) + labs(x='Score',y='Density') + theme_bw(base_size=18)
-dev.print(pdf,'Temp2/score-density.pdf',width=8,height=3)
+ggplot(df,aes(x=score)) + geom_density(lwd=1.2,color = "#377eb8") + labs(x='Score',y='Density') + theme_bw(base_size=18)
+dev.print(pdf,'Temp3/score-density.pdf',width=2,height=2)
 
 tmp <- data.frame(Score = c(df$score, df.20$score, df.5$score), 
 	Duration = rep(c('60mins','20mins','5mins'), c(nrow(df),nrow(df.20),nrow(df.5))))

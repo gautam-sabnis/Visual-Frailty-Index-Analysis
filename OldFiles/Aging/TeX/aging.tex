@@ -1,0 +1,168 @@
+\documentclass[11pt]{amsart}
+\input{header_new}
+\def\code#1{\texttt{#1}}
+\newcommand{\RomanNumeralCaps}[1]
+    {\MakeUppercase{\romannumeral #1}}
+\usepackage{hyperref}
+\usepackage{caption,subcaption} 
+\usepackage{tikz,pifont}
+\usepackage{amssymb,mathtools,amsmath}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{natbib}
+
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-1.5in}
+\calclayout
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=red,
+    filecolor=red,      
+    urlcolor=red,
+    citecolor=blue,
+    linktoc=page
+}
+
+\makeatletter
+\def\@tocline#1#2#3#4#5#6#7{\relax
+  \ifnum #1>\c@tocdepth % then omit
+  \else
+    \par \addpenalty\@secpenalty\addvspace{#2}%
+    \begingroup \hyphenpenalty\@M
+    \@ifempty{#4}{%
+      \@tempdima\csname r@tocindent\number#1\endcsname\relax
+    }{%
+      \@tempdima#4\relax
+    }%
+    \parindent\z@ \leftskip#3\relax \advance\leftskip\@tempdima\relax
+    \rightskip\@pnumwidth plus4em \parfillskip-\@pnumwidth
+    #5\leavevmode\hskip-\@tempdima
+      \ifcase #1
+       \or\or \hskip 1em \or \hskip 2em \else \hskip 3em \fi%
+      #6\nobreak\relax
+    \hfill\hbox to\@pnumwidth{\@tocpagenum{#7}}\par% <---- \dotfill -> \hfill
+    \nobreak
+    \endgroup
+  \fi}
+\makeatother
+
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
+\begin{document}
+
+\title[Aging]{ Title \\ \today }
+
+
+\keywords{Aging}
+
+\maketitle
+\begin{abstract}
+	 
+\end{abstract} 
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+
+On average, mortality rates in humans tend to increase exponentially with age. However, this mortality rate does not apply uniformly to all humans in an age group; there is an observed heterogeneity in mortality and health status among individuals in an age cohort. One 80-year-old may have a long list of health issues, limited mobility, and cognitive deficits, while another may seem a decade younger than their true age. The difference in the rate of aging between individuals creates a difference between chronological and biological age. The concept of frailty is used to capture this phenomenon.
+ 
+Frailty is defined in the literature as the state of increased vulnerability to adverse health outcomes. Identifying frailty is an important clinical challenge as frail individuals tend to have both increased risk of diseases and disorders, worse health outcomes from the same disease, and even different symptoms of the same disease \citep{whitehead2014clinical}. Their all-cause mortality risk is also higher than non-frail individuals of a similar age.
+ 
+Though how to best quantify frailty is still controversial, one popular method is to use a frailty index (FI). In this method, an individual is scored on a set of age-related deficits as either 0 (no deficit), 0.5 (slight deficit), or 1 (deficit present). The scores are added up and divided by the total number of deficits in the frailty index, giving a final FI score. Studies have shown that the specific items included in a FI, provided they meet certain criteria, are not important \citep{rockwood2017frailty}. The criteria for items to be included in a FI are: 1) that the deficits are health-related; 2) that the deficits generally increase with age; 3) that the FI is composed of more than 30 different items; and 4) that the items in the FI do not saturate (e.g. become apparent in all individuals) at too early an age \citep{searle2008standard}. Frailty indexes constructed which fulfill the above requirements have consistent characteristics shared between them: average FI scores increase exponentially with age, variability in FI scores also increases with age, the score strongly predicts risk of adverse outcomes and mortality, and there is a submaximal limit of about $\frac{2}{3}$ of deficits accumulated after which the individual dies \citep{searle2008standard}. Although human frailty indexes have been studied extensively, it is only recently that researchers have recreated one for mice. 
+ 
+In mice, the frailty index consists of 30 set features which can be graded without the use of specialized equipment. In a 2017 study by \citet{rockwood2017frailty} comparing the mouse frailty index across lifespan of two hundred fifty-one male C57BL/6J to human FI data, the mouse CFI showed several essential features seen with human aging. The mouse CFI had a similar distribution to humans where the mean FI score increased exponentially with age with comparable values at comparable life stages. The FI scores also showed a dose-response relationship with mortality and a submaximal limit. Although individual deficit accumulation patterns varied, the distribution of the frailty index broadened with age and mean deficit accumulation increased. At all ages, greater deficit accumulation was associated with reduced survival in age-adjusted models. These results point to the potential usefulness of the FI concept for a preclinical model of frailty and aging. Indeed, the mouse CFI has since been used to evaluate interventions on frailty such as administering resveratrol and caloric restrictions, and to study the changes in aging of the microbiome, inflammation, genetics, and heart health \citep{kane2017implementation}.
+
+Unlike the human frailty index, most mouse frailty indexing has been done with the same set of 30 features. It is likely though, that just as the human frailty index is robust to different sets of deficits, a new mouse CFI can be constructed. Indeed, some studies have already substituted a small number of mouse CFI features for ones that fit their specific strain or experiment \citep{kane2017implementation}. We propose that we can use this characteristic of frailty indexes to construct our own. We hypothesize that biological aging produces changes in behavior and physiology which can be captured with our video assay. Our goal is to develop an efficient and scalable visual frailty index from video metrics using modeling. Such an FI could be used to study mechanisms, exacerbators, and interventions for biological aging on a large scale. 
+
+\section{Methods}
+Two hundred fifty-three C57BL/6J mice of varying ages were put in the one-hour open field test with top-down video taken. They were then given a frailty index score by trained scorers. The ages of the mice ranged from 20 to 134 weeks. There were 161 males and 92 females. Below is a plot showing CFI scores by age, colored for sex (males in blue, females in red):
+
+\begin{center}
+
+Leinani's figure
+
+\end{center} 
+
+
+
+
+Though the overall trend for the mean is to increase with age group, there is a slight dip between 80 to 100 weeks. Further, although standard deviation of the group increased with age group, after 40 weeks the increase is only slight.
+
+In order to see how the scorer had an effect on ratings, a plot graphing FI by age colored by the scorer was made:
+
+\begin{center}
+
+Leinani's figure
+
+\end{center} 
+
+
+The plot reveals some obvious scorer effects. The red scorer tended to have slightly higher CFI scores while the purple scorer tended to have slightly lower CFI scores. In the 70 to 90 week age range, the turquoise scorer was dominant, combined with the purple scorer, and they tended towards lower CFI scores. This may explain the slight dip seen in group means.
+
+The videos of each mouse were run through our open field pipeline which consists of the standard gait metrics and the open field metrics. For a review of these metrics refer to (*********)
+
+In addition to our standard pipeline features, we engineered features from the video data. The first feature we looked at was flexibility. Spinal mobility in humans is a predictor for quality of life in aged populations \citep{imagama2011back} and the mouse is used as a model for the aging human spine (Holguin et al., 2014). Thus, we hypothesized that aged mice may bend their spine to a lesser degree, or less often due to reduced flexibility or spine degeneration. This change in flexibility can be captured by the pose estimation. In this approach, we take the coordinates of three points on the mouse at each video frame: the back of the head (A), the middle of the back (B), and the base of the tail (C). A line is drawn through the points. Tracking the length of the line AC normalized for mouse length (dAC), the orthogonal distance of the middle of the back B from the line (dB), and the angle of the three points (aABC) is used as a measure of the bend in the spine. For each of the three per frame measures (dAC, dB, and aABC) a mean, median, standard deviation, minimum, and maximum are calculated per video. These become the features to be used in the model.
+
+\begin{center} 
+
+Leinani's figure
+
+\end{center} 
+
+The next engineered features were body composition features. In humans, anthropometric measures such as BMI and waist-to-hip ratio are predictors for certain health conditions and mortality risk. Aging is associated with changes in body composition, increased visceral fat and decreased subcutaneous fat, progressive dysfunction of adipose tissue, and changes in ratio of brown and white adipose tissue \citep{huffman2009role}. These changes are also seen in obese patients, making them present as prematurely aged.  Though obesity, as defined by BMI, is a predictor for various metabolic disorders, cardiovascular disorders, cognitive disorders, and overall mortality risk, it seems that visceral fat is a strong causal factor \citep{huffman2009role}. Visceral fat creates a systemic inflammatory environment via secretion of inflammasomes. This ties visceral fat to the popular theory of aging: ``Inflammaging'', where aging is caused or exacerbated by chronic low grade inflammation \citep{perez2016adipaging}. Visceral fat is a better predictor for various health issues and mortality than BMI \citep{scafoglieri2014use}. This is thought to be because BMI can sometimes be a poor predictor of visceral fat. Further, anthropometric measures tend to vary based on measurement points and are also unreliable measures of visceral fat, though they may still be good predictors of risk of disorders and mortality. 
+
+In mice, changes in body composition are observed as well \citep{pappas2019translation}. So far, no body measurements have been shown to solidly predict visceral fat, and specialized equipment must be used to predict fat composition. We observed that body weight was very highly correlated with the gait metrics with the highest correlations with FI score. Thus, we hypothesize that body composition metrics may show some signal for aging and frailty. On each frame, an ellipse was fitted to the mouse, giving a width and a length. The means and medians of the mouse width were used as features. Further, we took the coordinates of the rear paws of the mice per frame as a estimation of hip width. The mean and median rear paw width were also used as features for the model.
+
+  We also looked into features related to intra-mouse variability of gait. A known part of aging is the heterogeneity in the presence of aging related metrics across an age group--heterogeneity in the age group increases with age group. This is a characteristic of the frailty index. There is also interest in heterogeneity at the individual level. In addition to looking at inter-group heterogeneity in gait, we looked at intramouse heterogeneity in gait using standard deviation and interquartile range of the mouse for each gait metric. The standard deviations and interquartile ranges were used as features for the model.
+
+
+
+
+
+
+\section{ML}
+Our goal is to predict age and frailty index (FI) from video data (gait phenotypes, open field metrics, engineered features) as accurately as possible. There are several different sets of video features that include animal features, gait features, open field metrics and engineered features available for modeling age and FI. 
+
+We fit models in Table \ref{models} using a variety of machine learning methods. We use repeated 10-fold cross-validation with 10 repeats to assess the performance of our machine learning methods. 
+
+
+Before buidling the models, we will split the data into training and test sets. The training set will be used to explore features, tune hyper-parameters, develop and compare models (\ref{models}). The test set will be used to arrive at a final, unbiased assessment models' performance. To partition the data, we split the original data (n = 252) in a {\textit{stratified}} manner to preserve the class distribution of the score. This will keep the distribution of animal scores approximately the same (\Cref{figure1}). 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=150mm]{TeXPlots/figure1.pdf}
+\caption{Distribution of scores}
+\label{figure1}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Model & Input & Output \\ 
+\hline
+M1 & Frailty features & Age \\
+\hline 
+M2 & Video features & Age \\
+\hline 
+M3 & Video features & FI \\
+\hline 
+M4 & Age & FI \\
+\hline
+\end{tabular}
+\caption{We compare the performance of video features in predicting age (M2) with frailty parameters in predicting age (M1). Similarly we compare performace of video features with age in predicting FI (M3 vs M4).}
+\label{models}
+\end{table}
+
+Our modeling process proceeds as follows,
+\begin{itemize} 
+  \item Pre-processing the input features.
+  \item E
+
+
+\newpage
+\bibliographystyle{ims}
+\bibliography{references}
+\end{document}

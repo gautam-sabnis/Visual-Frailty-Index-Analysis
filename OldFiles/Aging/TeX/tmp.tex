@@ -1,0 +1,501 @@
+\documentclass[11pt,reqno]{amsart}
+
+\usepackage{longtable,makecell}
+
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-1.5in}
+\calclayout
+
+\makeatletter
+\def\@tocline#1#2#3#4#5#6#7{\relax
+  \ifnum #1>\c@tocdepth % then omit
+  \else
+    \par \addpenalty\@secpenalty\addvspace{#2}%
+    \begingroup \hyphenpenalty\@M
+    \@ifempty{#4}{%
+      \@tempdima\csname r@tocindent\number#1\endcsname\relax
+    }{%
+      \@tempdima#4\relax
+    }%
+    \parindent\z@ \leftskip#3\relax \advance\leftskip\@tempdima\relax
+    \rightskip\@pnumwidth plus4em \parfillskip-\@pnumwidth
+    #5\leavevmode\hskip-\@tempdima
+      \ifcase #1
+       \or\or \hskip 1em \or \hskip 2em \else \hskip 3em \fi%
+      #6\nobreak\relax
+    \hfill\hbox to\@pnumwidth{\@tocpagenum{#7}}\par% <---- \dotfill -> \hfill
+    \nobreak
+    \endgroup
+  \fi}
+\makeatother
+
+
+\begin{document}
+
+ \begin{longtable}[c]{|c|c|c|c|c|c|c|}
+ \caption{Feature Correlation with FI score \label{correlation-table-FI}}\\
+
+\hline
+ \multicolumn{7}{|c|}{Feature Correlation with FI score}\\
+ \hline
+ \multicolumn{1}{|c}{Features} & \multicolumn{2}{|c}{All Mice} & \multicolumn{2}{|c}{Males} & 
+ \multicolumn{2}{|c|}{Females} \\
+ \cline{2-7}
+\multicolumn{1}{|c|}{} & Correlation & p-value & Correlation & p-value & Correlation & p-value \\
+ \hline
+ \endfirsthead
+
+ \hline
+ \multicolumn{7}{|c|}{Feature Correlation with FI score (Table continued)}\\
+ \hline
+ \multicolumn{1}{|c}{Features} & \multicolumn{2}{|c}{All Mice} & \multicolumn{2}{|c}{Males} & 
+ \multicolumn{2}{|c|}{Females} \\
+ \cline{2-7}
+\multicolumn{1}{|c|}{} & Correlation & p-value & Correlation & p-value & Correlation & p-value \\
+ \hline
+ \endhead
+ \hline
+ \endfoot
+
+ \hline
+ \multicolumn{7}{| c |}{End of Table}\\
+ \hline
+ \endlastfoot
+
+median\_width                             & 0.636    & 0.000   & 0.616  & 0.000   & 0.538   & 0.000   \\
+tip\_tail\_lateral\_displacement\_iqr     & 0.628    & 0.000   & 0.619  & 0.000   & 0.577   & 0.000   \\
+tip\_tail\_lateral\_displacement\_stdev   & 0.620    & 0.000   & 0.638  & 0.000   & 0.529   & 0.000   \\
+median\_step\_width                       & 0.620    & 0.000   & 0.573  & 0.000   & 0.575   & 0.000   \\
+step\_width\_stdev                        & 0.610    & 0.000   & 0.574  & 0.000   & 0.582   & 0.000   \\
+median\_rearpaw                           & 0.605    & 0.000   & 0.546  & 0.000   & 0.590   & 0.000   \\
+step\_length1\_iqr                        & 0.580    & 0.000   & 0.642  & 0.000   & 0.335   & 0.000   \\
+step\_length2\_iqr                        & 0.567    & 0.000   & 0.621  & 0.000   & 0.337   & 0.000   \\
+step\_length2\_stdev                      & 0.562    & 0.000   & 0.605  & 0.000   & 0.417   & 0.000   \\
+temporal\_symmetry\_stdev                 & 0.545    & 0.000   & 0.560  & 0.000   & 0.420   & 0.000   \\
+step\_width\_iqr                          & 0.528    & 0.000   & 0.496  & 0.000   & 0.513   & 0.000   \\
+dB\_median                                & 0.519    & 0.000   & 0.445  & 0.000   & 0.528   & 0.000   \\
+stride\_length\_stdev                     & 0.517    & 0.000   & 0.520  & 0.000   & 0.451   & 0.000   \\
+dB\_nongait\_median                       & 0.512    & 0.000   & 0.486  & 0.000   & 0.489   & 0.000   \\
+base\_tail\_lateral\_displacement\_iqr    & 0.509    & 0.000   & 0.511  & 0.000   & 0.472   & 0.000   \\
+step\_length1\_stdev                      & 0.506    & 0.000   & 0.569  & 0.000   & 0.251   & 0.000   \\
+median\_speed\_cm\_per\_sec               & -0.498   & 0.000   & -0.514 & 0.000   & -0.416  & 0.000   \\
+stride\_length\_iqr                       & 0.486    & 0.000   & 0.467  & 0.000   & 0.432   & 0.000   \\
+temporal\_symmetry\_iqr                   & 0.485    & 0.000   & 0.499  & 0.000   & 0.357   & 0.000   \\
+median\_length                            & 0.466    & 0.000   & 0.350  & 0.000   & 0.489   & 0.000   \\
+limb\_duty\_factor\_stdev                 & 0.444    & 0.000   & 0.490  & 0.000   & 0.208   & 0.002   \\
+median\_stride\_length                    & -0.433   & 0.000   & -0.513 & 0.000   & -0.155  & 0.019   \\
+avg\_bout\_len                            & -0.427   & 0.000   & -0.454 & 0.000   & -0.302  & 0.000   \\
+base\_tail\_lateral\_displacement\_stdev  & 0.422    & 0.000   & 0.427  & 0.000   & 0.387   & 0.000   \\
+speed\_cm\_per\_sec\_iqr                  & -0.372   & 0.000   & -0.399 & 0.000   & -0.347  & 0.000   \\
+dAC\_nongait\_median                      & 0.352    & 0.000   & 0.258  & 0.000   & 0.362   & 0.000   \\
+limb\_duty\_factor\_iqr                   & 0.349    & 0.000   & 0.370  & 0.000   & 0.168   & 0.011   \\
+speed\_cm\_per\_sec\_stdev                & -0.318   & 0.000   & -0.325 & 0.000   & -0.332  & 0.000   \\
+rears\_0\_5                               & -0.315   & 0.000   & -0.303 & 0.000   & -0.269  & 0.000   \\
+dAC\_standard deviation                   & -0.295   & 0.000   & -0.292 & 0.000   & -0.226  & 0.001   \\
+dAC\_min                                  & 0.294    & 0.000   & 0.278  & 0.000   & 0.345   & 0.000   \\
+median\_tip\_tail\_lateral\_displacement  & 0.279    & 0.000   & 0.207  & 0.000   & 0.507   & 0.000   \\
+nose\_lateral\_displacement\_stdev        & -0.265   & 0.000   & -0.206 & 0.000   & -0.217  & 0.001   \\
+median\_step\_length1                     & -0.263   & 0.000   & -0.329 & 0.000   & -0.020  & 0.759   \\
+aABC\_min                                 & 0.243    & 0.000   & 0.249  & 0.000   & 0.276   & 0.000   \\
+aABC\_median                              & -0.241   & 0.000   & -0.189 & 0.001   & -0.192  & 0.004   \\
+nose\_lateral\_displacement\_iqr          & -0.221   & 0.000   & -0.159 & 0.004   & -0.164  & 0.014   \\
+rear\_count                               & -0.192   & 0.000   & -0.248 & 0.000   & -0.093  & 0.161   \\
+median\_temporal\_symmetry                & 0.191    & 0.000   & 0.192  & 0.001   & 0.203   & 0.002   \\
+aABC\_nongait\_standard\_deviation        & -0.190   & 0.000   & -0.285 & 0.000   & -0.127  & 0.056   \\
+aABC\_standard\_deviation                 & -0.184   & 0.000   & -0.261 & 0.000   & -0.176  & 0.008   \\
+rears\_5\_10                              & -0.183   & 0.000   & -0.194 & 0.000   & -0.116  & 0.082   \\
+corner\_distance\_cm                      & -0.180   & 0.000   & -0.166 & 0.003   & -0.133  & 0.045   \\
+median\_step\_length2                     & -0.176   & 0.000   & -0.280 & 0.000   & 0.084   & 0.208   \\
+Distance cm/sc                            & -0.174   & 0.000   & -0.183 & 0.001   & -0.093  & 0.162   \\
+angular\_velocity\_iqr                    & 0.157    & 0.000   & 0.205  & 0.000   & 0.105   & 0.115   \\
+periphery\_distance\_cm                   & -0.153   & 0.000   & -0.182 & 0.001   & -0.060  & 0.370   \\
+distance\_cm                              & -0.147   & 0.001   & -0.182 & 0.001   & -0.054  & 0.421   \\
+median\_base\_tail\_lateral\_displacement & 0.147    & 0.001   & 0.096  & 0.085   & 0.444   & 0.000   \\
+dAC\_nongait\_min                         & 0.146    & 0.001   & 0.152  & 0.006   & 0.211   & 0.001   \\
+aABC\_nongait\_median                     & -0.142   & 0.001   & -0.109 & 0.050   & -0.167  & 0.012   \\
+grooming\_number\_bouts                   & -0.137   & 0.001   & -0.123 & 0.028   & -0.086  & 0.196   \\
+dB\_nongait\_min                          & 0.117    & 0.006   & 0.136  & 0.014   & 0.144   & 0.030   \\
+grooming\_duration\_secs                  & -0.109   & 0.010   & -0.075 & 0.183   & -0.133  & 0.046   \\
+corner\_time\_secs                        & -0.100   & 0.019   & -0.035 & 0.529   & -0.140  & 0.035   \\
+center\_distance\_cm                      & -0.087   & 0.042   & -0.119 & 0.033   & -0.025  & 0.704   \\
+median\_limb\_duty\_factor                & -0.086   & 0.044   & -0.088 & 0.112   & -0.068  & 0.309   \\
+median\_nose\_lateral\_displacement       & -0.081   & 0.057   & -0.009 & 0.877   & -0.102  & 0.124   \\
+center\_time\_secs                        & 0.067    & 0.120   & 0.047  & 0.407   & 0.061   & 0.358   \\
+dB\_standard\_deviation                   & 0.063    & 0.140   & 0.010  & 0.853   & 0.061   & 0.359   \\
+dAC\_median                               & 0.058    & 0.177   & 0.014  & 0.803   & 0.194   & 0.003   \\
+dB\_nongait\_standard\_deviation          & 0.053    & 0.213   & -0.009 & 0.867   & 0.150   & 0.024   \\
+periphery\_time\_secs                     & -0.053   & 0.215   & -0.038 & 0.500   & -0.067  & 0.312   \\
+aABC\_nongait\_min                        & 0.047    & 0.270   & 0.037  & 0.510   & 0.066   & 0.323   \\
+dB\_max                                   & 0.045    & 0.294   & 0.018  & 0.749   & -0.034  & 0.608   \\
+stride\_count                             & -0.035   & 0.409   & 0.020  & 0.713   & 0.025   & 0.707   \\
+angular\_velocity\_stdev                  & 0.035    & 0.414   & 0.086  & 0.124   & -0.047  & 0.481   \\
+dAC\_nongait\_standard\_deviation         & -0.034   & 0.425   & -0.086 & 0.124   & 0.027   & 0.689   \\
+dB\_nongait\_max                          & 0.024    & 0.579   & 0.015  & 0.795   & 0.026   & 0.694   \\
+median\_angular\_velocity                 & -0.004   & 0.930   & -0.039 & 0.488   & 0.090   & 0.177 \\
+
+ \end{longtable}
+
+
+
+ \begin{longtable}[c]{|c|c|c|c|c|c|c|}
+ \caption{Feature Correlation with Age \label{correlation-table-Age}}\\
+
+\hline
+ \multicolumn{7}{|c|}{Feature Correlation with Age}\\
+ \hline
+ \multicolumn{1}{|c}{Features} & \multicolumn{2}{|c}{All Mice} & \multicolumn{2}{|c}{Males} & 
+ \multicolumn{2}{|c|}{Females} \\
+ \cline{2-7}
+\multicolumn{1}{|c|}{} & Correlation & p-value & Correlation & p-value & Correlation & p-value \\
+ \hline
+ \endfirsthead
+
+ \hline
+ \multicolumn{7}{|c|}{Feature Correlation with Age (Table continued)}\\
+ \hline
+ \multicolumn{1}{|c}{Features} & \multicolumn{2}{|c}{All Mice} & \multicolumn{2}{|c}{Males} & 
+ \multicolumn{2}{|c|}{Females} \\
+ \cline{2-7}
+\multicolumn{1}{|c|}{} & Correlation & p-value & Correlation & p-value & Correlation & p-value \\
+ \hline
+ \endhead
+ \hline
+ \endfoot
+
+ \hline
+ \multicolumn{7}{| c |}{End of Table}\\
+ \hline
+ \endlastfoot
+
+tip\_tail\_lateral\_displacement\_iqr     & 0.764    & 0.000   & 0.750  & 0.000   & 0.757   & 0.000  \\
+tip\_tail\_lateral\_displacement\_stdev   & 0.737    & 0.000   & 0.740  & 0.000   & 0.694   & 0.000  \\
+step\_width\_stdev                        & 0.726    & 0.000   & 0.697  & 0.000   & 0.727   & 0.000  \\
+median\_width                             & 0.697    & 0.000   & 0.689  & 0.000   & 0.663   & 0.000  \\
+median\_step\_width                       & 0.697    & 0.000   & 0.652  & 0.000   & 0.717   & 0.000  \\
+step\_length2\_stdev                      & 0.678    & 0.000   & 0.723  & 0.000   & 0.570   & 0.000  \\
+median\_rearpaw                           & 0.675    & 0.000   & 0.623  & 0.000   & 0.702   & 0.000  \\
+step\_length2\_iqr                        & 0.668    & 0.000   & 0.717  & 0.000   & 0.499   & 0.000  \\
+step\_length1\_iqr                        & 0.660    & 0.000   & 0.721  & 0.000   & 0.461   & 0.000  \\
+step\_width\_iqr                          & 0.631    & 0.000   & 0.594  & 0.000   & 0.655   & 0.000  \\
+temporal\_symmetry\_stdev                 & 0.625    & 0.000   & 0.643  & 0.000   & 0.523   & 0.000  \\
+stride\_length\_stdev                     & 0.614    & 0.000   & 0.639  & 0.000   & 0.549   & 0.000  \\
+base\_tail\_lateral\_displacement\_iqr    & 0.606    & 0.000   & 0.576  & 0.000   & 0.640   & 0.000  \\
+step\_length1\_stdev                      & 0.596    & 0.000   & 0.655  & 0.000   & 0.386   & 0.000  \\
+dB\_nongait\_median                       & 0.584    & 0.000   & 0.577  & 0.000   & 0.552   & 0.000  \\
+stride\_length\_iqr                       & 0.573    & 0.000   & 0.567  & 0.000   & 0.525   & 0.000  \\
+temporal\_symmetry\_iqr                   & 0.566    & 0.000   & 0.564  & 0.000   & 0.490   & 0.000  \\
+median\_speed\_cm\_per\_sec               & -0.541   & 0.000   & -0.533 & 0.000   & -0.510  & 0.000  \\
+median\_length                            & 0.536    & 0.000   & 0.444  & 0.000   & 0.590   & 0.000  \\
+dB\_median                                & 0.525    & 0.000   & 0.456  & 0.000   & 0.556   & 0.000  \\
+limb\_duty\_factor\_stdev                 & 0.509    & 0.000   & 0.546  & 0.000   & 0.319   & 0.000  \\
+avg\_bout\_len                            & -0.508   & 0.000   & -0.542 & 0.000   & -0.388  & 0.000  \\
+base\_tail\_lateral\_displacement\_stdev  & 0.503    & 0.000   & 0.471  & 0.000   & 0.543   & 0.000  \\
+median\_stride\_length                    & -0.450   & 0.000   & -0.530 & 0.000   & -0.177  & 0.007  \\
+dAC\_standard deviation                   & -0.393   & 0.000   & -0.392 & 0.000   & -0.338  & 0.000  \\
+dAC\_nongait\_median                      & 0.390    & 0.000   & 0.310  & 0.000   & 0.418   & 0.000  \\
+limb\_duty\_factor\_iqr                   & 0.383    & 0.000   & 0.403  & 0.000   & 0.224   & 0.001  \\
+dAC\_min                                  & 0.380    & 0.000   & 0.366  & 0.000   & 0.432   & 0.000  \\
+speed\_cm\_per\_sec\_iqr                  & -0.374   & 0.000   & -0.381 & 0.000   & -0.377  & 0.000  \\
+median\_tip\_tail\_lateral\_displacement  & 0.371    & 0.000   & 0.252  & 0.000   & 0.675   & 0.000  \\
+rears\_0\_5                               & -0.364   & 0.000   & -0.326 & 0.000   & -0.376  & 0.000  \\
+speed\_cm\_per\_sec\_stdev                & -0.314   & 0.000   & -0.320 & 0.000   & -0.327  & 0.000  \\
+aABC\_min                                 & 0.310    & 0.000   & 0.330  & 0.000   & 0.317   & 0.000  \\
+nose\_lateral\_displacement\_stdev        & -0.297   & 0.000   & -0.279 & 0.000   & -0.202  & 0.002  \\
+aABC\_nongait\_standard\_deviation        & -0.267   & 0.000   & -0.315 & 0.000   & -0.265  & 0.000  \\
+aABC\_standard\_deviation                 & -0.267   & 0.000   & -0.304 & 0.000   & -0.311  & 0.000  \\
+median\_step\_length1                     & -0.262   & 0.000   & -0.321 & 0.000   & -0.035  & 0.601  \\
+nose\_lateral\_displacement\_iqr          & -0.254   & 0.000   & -0.237 & 0.000   & -0.146  & 0.027  \\
+median\_temporal\_symmetry                & 0.241    & 0.000   & 0.248  & 0.000   & 0.244   & 0.000  \\
+median\_base\_tail\_lateral\_displacement & 0.226    & 0.000   & 0.119  & 0.032   & 0.600   & 0.000  \\
+rears\_5\_10                              & -0.210   & 0.000   & -0.195 & 0.000   & -0.193  & 0.003  \\
+grooming\_number\_bouts                   & -0.196   & 0.000   & -0.149 & 0.007   & -0.211  & 0.001  \\
+aABC\_median                              & -0.188   & 0.000   & -0.174 & 0.002   & -0.092  & 0.167  \\
+rear\_count                               & -0.188   & 0.000   & -0.224 & 0.000   & -0.113  & 0.089  \\
+grooming\_duration\_secs                  & -0.173   & 0.000   & -0.127 & 0.024   & -0.231  & 0.000  \\
+angular\_velocity\_iqr                    & 0.160    & 0.000   & 0.175  & 0.002   & 0.182   & 0.006  \\
+corner\_distance\_cm                      & -0.151   & 0.000   & -0.089 & 0.112   & -0.191  & 0.004  \\
+center\_distance\_cm                      & -0.147   & 0.001   & -0.188 & 0.001   & -0.074  & 0.267  \\
+distance\_cm                              & -0.147   & 0.001   & -0.154 & 0.006   & -0.098  & 0.140  \\
+median\_step\_length2                     & -0.142   & 0.001   & -0.231 & 0.000   & 0.110   & 0.097  \\
+Distance cm/sc                            & -0.133   & 0.002   & -0.157 & 0.004   & -0.025  & 0.703  \\
+dAC\_nongait\_min                         & 0.132    & 0.002   & 0.181  & 0.001   & 0.120   & 0.071  \\
+dB\_nongait\_min                          & 0.131    & 0.002   & 0.214  & 0.000   & 0.054   & 0.420  \\
+periphery\_distance\_cm                   & -0.126   & 0.003   & -0.114 & 0.042   & -0.097  & 0.146  \\
+dAC\_nongait\_standard\_deviation         & -0.120   & 0.005   & -0.188 & 0.001   & -0.033  & 0.625  \\
+median\_nose\_lateral\_displacement       & -0.112   & 0.009   & -0.083 & 0.137   & -0.061  & 0.358  \\
+median\_limb\_duty\_factor                & -0.101   & 0.018   & -0.093 & 0.095   & -0.103  & 0.123  \\
+aABC\_nongait\_median                     & -0.091   & 0.033   & -0.093 & 0.096   & -0.065  & 0.330  \\
+dB\_standard\_deviation                   & 0.083    & 0.051   & 0.070  & 0.205   & 0.036   & 0.590  \\
+dB\_max                                   & 0.076    & 0.074   & 0.065  & 0.242   & -0.018  & 0.784  \\
+corner\_time\_secs                        & -0.066   & 0.125   & 0.032  & 0.563   & -0.166  & 0.012  \\
+median\_angular\_velocity                 & 0.040    & 0.350   & 0.001  & 0.990   & 0.163   & 0.014  \\
+dB\_nongait\_standard\_deviation          & -0.037   & 0.383   & -0.122 & 0.029   & 0.098   & 0.143  \\
+aABC\_nongait\_min                        & 0.035    & 0.409   & 0.030  & 0.586   & 0.039   & 0.562  \\
+dAC\_median                               & 0.034    & 0.432   & -0.023 & 0.673   & 0.202   & 0.002  \\
+center\_time\_secs                        & -0.028   & 0.510   & -0.075 & 0.179   & 0.007   & 0.919  \\
+angular\_velocity\_stdev                  & 0.023    & 0.584   & 0.040  & 0.476   & 0.005   & 0.943  \\
+stride\_count                             & -0.023   & 0.596   & 0.022  & 0.697   & 0.032   & 0.632  \\
+dB\_nongait\_max                          & 0.014    & 0.736   & -0.007 & 0.893   & 0.042   & 0.527  \\
+periphery\_time\_secs                     & -0.013   & 0.764   & 0.050  & 0.374   & -0.097  & 0.146 
+
+
+
+\end{longtable}
+
+
+ \begin{longtable}[c]{|p{0.15\linewidth}|p{0.23\linewidth}|p{0.45\linewidth}|p{0.18\linewidth}|}
+ \caption{Video Metrics \label{video-metrics}}\\
+
+\hline
+ \multicolumn{4}{|c|}{Video Metrics}\\
+ \hline
+ \multicolumn{1}{|p{0.15\linewidth}}{Category} & \multicolumn{1}{|p{0.23\linewidth}}{Name} & \multicolumn{1}{|p{0.45\linewidth}}{Description} & 
+ \multicolumn{1}{|p{0.18\linewidth}|}{Units} \\
+  \hline
+ \endfirsthead
+
+ \hline
+ \multicolumn{4}{|c|}{Video Metrics}\\
+ \hline
+ \multicolumn{1}{|p{0.15\linewidth}}{Category} & \multicolumn{1}{|p{0.23\linewidth}}{Name} & \multicolumn{1}{|p{0.45\linewidth}}{Description} & 
+ \multicolumn{1}{|p{0.18\linewidth}|}{Units} \\
+  \hline 
+  \endhead
+ \hline
+ \endfoot
+
+ \hline
+ \multicolumn{4}{|c|}{End of Table}\\
+ \hline
+ \endlastfoot
+
+ Open Field  & distance\_cm             & Sum of locomotor activity.                                                                                                                                                                                                                                                              & centimeters         \\[.3cm]
+Open Field  & center\_time\_secs       & Sum of time spent in center.                                                                                                                                                                                                                                                            & seconds             \\[.3cm]
+Open Field  & periphery\_time\_secs    & Sum of time spent along any wall.                                                                                                                                                                                                                                                       & seconds             \\[.3cm]
+Open Field  & corner\_time\_secs       & Sum of time spent in any corner.                                                                                                                                                                                                                                                        & seconds             \\[.3cm]
+Open Field & center\_distance\_cm     & Average distance from center across the video.                                                                                                                                                                                                                                          & centimeters         \\[.3cm]
+Open Field & periphery\_distance\_cm  & Average distance from nearest periphery across the video.                                                                                                                                                                                                                               & centimeters         \\[.3cm]
+Open Field & corner\_distance\_cm     & Average distance from nearest corners across the video.                                                                                                                                                                                                                                 & centimeters         \\[.3cm]
+Open Field  & grooming\_number\_bouts  & Sum of all grooming bouts in video.                                                                                                                                                                                                                                                     & \textasciitilde{}   \\[.3cm]
+Open Field  & grooming\_duration\_secs & Average length of grooming bouts.                                                                                                                                                                                                                                                       & seconds             \\[.3cm]
+Gait             & angular\_velocity        & The first derivative of angle of a mouse, determined by the vector connecting the mouse’s base of tail to its base of neck                                                                                                                                                              & degrees/second      \\[.9cm]
+Gait             & lateral\_displacement    & The difference between the minimum and maximum values of a reference point's perpendicular distance from the mouse’s displacement vector for a stride for each frame of a stride, normalized by the mouse's body length. The referece points used are nose, base of tail, and tail tip. & \textasciitilde{}   \\[1.6cm]
+Gait             & limb\_duty\_factor       & The amount of time that the paw is in contact with the ground divided by the full stride time, calculated and averaged for each hind paw.                                                                                                                                               & \textasciitilde{}   \\[.8cm]
+Gait             & speed\_cm\_per\_sec      & Speed is determined by the base of tail point.                                                                                                                                                                                                                                          & centimeters/second  \\[.3cm]
+Gait             & step\_length             & The distance that the right hind paw travels past the previous opposite paw strike. Step\_length 1 uses left hind paw strike, while step\_length2 uses right hind paw strike.                                                                                                           & centimeters         \\[.93cm]
+Gait             & step\_width              & The length of the shortest line segment that connects the right hind paw strike to the line that connects the left hind paw’s toe-off location to its subsequent foot strike position.                                                                                                  & centimeters         \\[1.3cm]
+Gait             & stride\_length           & The full distance that the left hind paw travels for a stride, from toe-off to foot-strike.                                                                                                                                                                                             & centimeters         \\[.4cm]
+Gait             & temporal\_symmetry       & The difference in time between the left and right hindpaw strike, divided by the total strike time.                                                                                                                                                                                     & \textasciitilde{}   \\[.6cm]
+Gait             & stride\_count            & Sum of all recorded strides in video.                                                                                                                                                                                                                                                   & strides             \\[.4cm]
+Gait             & distance\_cm\_sc         & Sum of locomotor activity, normalized by time spent in open field.                                                                                                                                                                                                                      & centimeters/second  \\
+Engineered       & dAC                      & Distance between base of head and base of tail, normalized by the max dAC recorded.                                                                                                                                                                                                     & centimeters         \\[.5cm]
+Engineered       & dB                       & The distance between the mid-back point and the midpoint of the line AC.                                                                                                                                                                                                                & centimeters         \\[.5cm]
+Engineered       & aABC                     & The angle between the base of head point, mid-back point, and base of tail point.                                                                                                                                                                                                       & degrees             \\[.5cm]
+Engineered       & width                    & Width of the ellipse fit for the mouse calculated for all frames.                                                                                                                                                                                                                       & centimeters         \\[.5cm]
+Engineered       & length                   & Length of the ellipse fit for the mouse calculated for all frames.                                                                                                                                                                                                                      & centimeters         \\[.5cm]
+Engineered       & rearpaw                  & The distance between rearpaws calculated for all frames.                                                                                                                                                                                                                                & centimeters         \\[.3cm]
+Engineered       & rear\_count              & Sum of rearing bouts in video.                                                                                                                                                                                                                                                          & \textasciitilde{}   \\[.4cm]
+Engineered       & avg\_rear\_len           & Average length of rearing bouts in video.                                                                                                                                                                                                                                               & seconds            
+
+
+
+ \end{longtable}
+
+
+\begin{table}
+\caption {Video Metrics}  
+\footnotesize
+\centering
+\begin{tabular}{p{0.1\linewidth} | p{0.18\linewidth}| p{0.45\linewidth}| p{0.08\linewidth}}
+\hline
+Category         & Name                     & Description               & Units               \\
+\hline
+Open Field  & distance\_cm             & Sum of locomotor activity.                                                                                                                                                                                                                                                              & centimeters         \\[.3cm]
+Open Field  & center\_time\_secs       & Sum of time spent in center.                                                                                                                                                                                                                                                            & seconds             \\[.3cm]
+Open Field  & periphery\_time\_secs    & Sum of time spent along any wall.                                                                                                                                                                                                                                                       & seconds             \\[.3cm]
+Open Field  & corner\_time\_secs       & Sum of time spent in any corner.                                                                                                                                                                                                                                                        & seconds             \\[.3cm]
+Open Field & center\_distance\_cm     & Average distance from center across the video.                                                                                                                                                                                                                                          & centimeters         \\[.3cm]
+Open Field & periphery\_distance\_cm  & Average distance from nearest periphery across the video.                                                                                                                                                                                                                               & centimeters         \\[.3cm]
+Open Field & corner\_distance\_cm     & Average distance from nearest corners across the video.                                                                                                                                                                                                                                 & centimeters         \\[.3cm]
+Open Field  & grooming\_number\_bouts  & Sum of all grooming bouts in video.                                                                                                                                                                                                                                                     & \textasciitilde{}   \\[.3cm]
+Open Field  & grooming\_duration\_secs & Average length of grooming bouts.                                                                                                                                                                                                                                                       & seconds             \\[.3cm]
+Gait             & angular\_velocity        & The first derivative of angle of a mouse, determined by the vector connecting the mouse’s base of tail to its base of neck                                                                                                                                                              & degrees/second      \\[.9cm]
+Gait             & lateral\_displacement    & The difference between the minimum and maximum values of a reference point's perpendicular distance from the mouse’s displacement vector for a stride for each frame of a stride, normalized by the mouse's body length. The referece points used are nose, base of tail, and tail tip. & \textasciitilde{}   \\[1.6cm]
+Gait             & limb\_duty\_factor       & The amount of time that the paw is in contact with the ground divided by the full stride time, calculated and averaged for each hind paw.                                                                                                                                               & \textasciitilde{}   \\[.8cm]
+Gait             & speed\_cm\_per\_sec      & Speed is determined by the base of tail point.                                                                                                                                                                                                                                          & centimeters/second  \\[.3cm]
+Gait             & step\_length             & The distance that the right hind paw travels past the previous opposite paw strike. Step\_length 1 uses left hind paw strike, while step\_length2 uses right hind paw strike.                                                                                                           & centimeters         \\[.93cm]
+Gait             & step\_width              & The length of the shortest line segment that connects the right hind paw strike to the line that connects the left hind paw’s toe-off location to its subsequent foot strike position.                                                                                                  & centimeters         \\[1.3cm]
+Gait             & stride\_length           & The full distance that the left hind paw travels for a stride, from toe-off to foot-strike.                                                                                                                                                                                             & centimeters         \\[.4cm]
+Gait             & temporal\_symmetry       & The difference in time between the left and right hindpaw strike, divided by the total strike time.                                                                                                                                                                                     & \textasciitilde{}   \\[.6cm]
+Gait             & stride\_count            & Sum of all recorded strides in video.                                                                                                                                                                                                                                                   & strides             \\[.4cm]
+Gait             & distance\_cm\_sc         & Sum of locomotor activity, normalized by time spent in open field.                                                                                                                                                                                                                      & centimeters/second  \\
+Engineered       & dAC                      & Distance between base of head and base of tail, normalized by the max dAC recorded.                                                                                                                                                                                                     & centimeters         \\[.5cm]
+Engineered       & dB                       & The distance between the mid-back point and the midpoint of the line AC.                                                                                                                                                                                                                & centimeters         \\[.5cm]
+Engineered       & aABC                     & The angle between the base of head point, mid-back point, and base of tail point.                                                                                                                                                                                                       & degrees             \\[.5cm]
+Engineered       & width                    & Width of the ellipse fit for the mouse calculated for all frames.                                                                                                                                                                                                                       & centimeters         \\[.5cm]
+Engineered       & length                   & Length of the ellipse fit for the mouse calculated for all frames.                                                                                                                                                                                                                      & centimeters         \\[.5cm]
+Engineered       & rearpaw                  & The distance between rearpaws calculated for all frames.                                                                                                                                                                                                                                & centimeters         \\[.3cm]
+Engineered       & rear\_count              & Sum of rearing bouts in video.                                                                                                                                                                                                                                                          & \textasciitilde{}   \\[.4cm]
+Engineered       & avg\_rear\_len           & Average length of rearing bouts in video.                                                                                                                                                                                                                                               & seconds            
+\end{tabular}
+\end{table}
+
+
+\begin{table}[]
+\caption {Feature Correlation with Age}  
+\footnotesize
+\begin{tabular}{{l|ll|ll|ll}}
+\hline
+Features                                  & All mice & p value & Males  & p value & Females & pvalue \\
+\hline
+tip\_tail\_lateral\_displacement\_iqr     & 0.764    & 0.000   & 0.750  & 0.000   & 0.757   & 0.000  \\
+tip\_tail\_lateral\_displacement\_stdev   & 0.737    & 0.000   & 0.740  & 0.000   & 0.694   & 0.000  \\
+step\_width\_stdev                        & 0.726    & 0.000   & 0.697  & 0.000   & 0.727   & 0.000  \\
+median\_width                             & 0.697    & 0.000   & 0.689  & 0.000   & 0.663   & 0.000  \\
+median\_step\_width                       & 0.697    & 0.000   & 0.652  & 0.000   & 0.717   & 0.000  \\
+step\_length2\_stdev                      & 0.678    & 0.000   & 0.723  & 0.000   & 0.570   & 0.000  \\
+median\_rearpaw                           & 0.675    & 0.000   & 0.623  & 0.000   & 0.702   & 0.000  \\
+step\_length2\_iqr                        & 0.668    & 0.000   & 0.717  & 0.000   & 0.499   & 0.000  \\
+step\_length1\_iqr                        & 0.660    & 0.000   & 0.721  & 0.000   & 0.461   & 0.000  \\
+step\_width\_iqr                          & 0.631    & 0.000   & 0.594  & 0.000   & 0.655   & 0.000  \\
+temporal\_symmetry\_stdev                 & 0.625    & 0.000   & 0.643  & 0.000   & 0.523   & 0.000  \\
+stride\_length\_stdev                     & 0.614    & 0.000   & 0.639  & 0.000   & 0.549   & 0.000  \\
+base\_tail\_lateral\_displacement\_iqr    & 0.606    & 0.000   & 0.576  & 0.000   & 0.640   & 0.000  \\
+step\_length1\_stdev                      & 0.596    & 0.000   & 0.655  & 0.000   & 0.386   & 0.000  \\
+dB\_nongait\_median                       & 0.584    & 0.000   & 0.577  & 0.000   & 0.552   & 0.000  \\
+stride\_length\_iqr                       & 0.573    & 0.000   & 0.567  & 0.000   & 0.525   & 0.000  \\
+temporal\_symmetry\_iqr                   & 0.566    & 0.000   & 0.564  & 0.000   & 0.490   & 0.000  \\
+median\_speed\_cm\_per\_sec               & -0.541   & 0.000   & -0.533 & 0.000   & -0.510  & 0.000  \\
+median\_length                            & 0.536    & 0.000   & 0.444  & 0.000   & 0.590   & 0.000  \\
+dB\_median                                & 0.525    & 0.000   & 0.456  & 0.000   & 0.556   & 0.000  \\
+limb\_duty\_factor\_stdev                 & 0.509    & 0.000   & 0.546  & 0.000   & 0.319   & 0.000  \\
+avg\_bout\_len                            & -0.508   & 0.000   & -0.542 & 0.000   & -0.388  & 0.000  \\
+base\_tail\_lateral\_displacement\_stdev  & 0.503    & 0.000   & 0.471  & 0.000   & 0.543   & 0.000  \\
+median\_stride\_length                    & -0.450   & 0.000   & -0.530 & 0.000   & -0.177  & 0.007  \\
+dAC\_standard deviation                   & -0.393   & 0.000   & -0.392 & 0.000   & -0.338  & 0.000  \\
+dAC\_nongait\_median                      & 0.390    & 0.000   & 0.310  & 0.000   & 0.418   & 0.000  \\
+limb\_duty\_factor\_iqr                   & 0.383    & 0.000   & 0.403  & 0.000   & 0.224   & 0.001  \\
+dAC\_min                                  & 0.380    & 0.000   & 0.366  & 0.000   & 0.432   & 0.000  \\
+speed\_cm\_per\_sec\_iqr                  & -0.374   & 0.000   & -0.381 & 0.000   & -0.377  & 0.000  \\
+median\_tip\_tail\_lateral\_displacement  & 0.371    & 0.000   & 0.252  & 0.000   & 0.675   & 0.000  \\
+rears\_0\_5                               & -0.364   & 0.000   & -0.326 & 0.000   & -0.376  & 0.000  \\
+speed\_cm\_per\_sec\_stdev                & -0.314   & 0.000   & -0.320 & 0.000   & -0.327  & 0.000  \\
+aABC\_min                                 & 0.310    & 0.000   & 0.330  & 0.000   & 0.317   & 0.000  \\
+nose\_lateral\_displacement\_stdev        & -0.297   & 0.000   & -0.279 & 0.000   & -0.202  & 0.002  \\
+aABC\_nongait\_standard\_deviation        & -0.267   & 0.000   & -0.315 & 0.000   & -0.265  & 0.000  \\
+aABC\_standard\_deviation                 & -0.267   & 0.000   & -0.304 & 0.000   & -0.311  & 0.000  \\
+median\_step\_length1                     & -0.262   & 0.000   & -0.321 & 0.000   & -0.035  & 0.601  \\
+nose\_lateral\_displacement\_iqr          & -0.254   & 0.000   & -0.237 & 0.000   & -0.146  & 0.027  \\
+median\_temporal\_symmetry                & 0.241    & 0.000   & 0.248  & 0.000   & 0.244   & 0.000  \\
+median\_base\_tail\_lateral\_displacement & 0.226    & 0.000   & 0.119  & 0.032   & 0.600   & 0.000  \\
+rears\_5\_10                              & -0.210   & 0.000   & -0.195 & 0.000   & -0.193  & 0.003  \\
+grooming\_number\_bouts                   & -0.196   & 0.000   & -0.149 & 0.007   & -0.211  & 0.001  \\
+aABC\_median                              & -0.188   & 0.000   & -0.174 & 0.002   & -0.092  & 0.167  \\
+rear\_count                               & -0.188   & 0.000   & -0.224 & 0.000   & -0.113  & 0.089  \\
+grooming\_duration\_secs                  & -0.173   & 0.000   & -0.127 & 0.024   & -0.231  & 0.000  \\
+angular\_velocity\_iqr                    & 0.160    & 0.000   & 0.175  & 0.002   & 0.182   & 0.006  \\
+corner\_distance\_cm                      & -0.151   & 0.000   & -0.089 & 0.112   & -0.191  & 0.004  \\
+center\_distance\_cm                      & -0.147   & 0.001   & -0.188 & 0.001   & -0.074  & 0.267  \\
+distance\_cm                              & -0.147   & 0.001   & -0.154 & 0.006   & -0.098  & 0.140  \\
+median\_step\_length2                     & -0.142   & 0.001   & -0.231 & 0.000   & 0.110   & 0.097  \\
+Distance cm/sc                            & -0.133   & 0.002   & -0.157 & 0.004   & -0.025  & 0.703  \\
+dAC\_nongait\_min                         & 0.132    & 0.002   & 0.181  & 0.001   & 0.120   & 0.071  \\
+dB\_nongait\_min                          & 0.131    & 0.002   & 0.214  & 0.000   & 0.054   & 0.420  \\
+periphery\_distance\_cm                   & -0.126   & 0.003   & -0.114 & 0.042   & -0.097  & 0.146  \\
+dAC\_nongait\_standard\_deviation         & -0.120   & 0.005   & -0.188 & 0.001   & -0.033  & 0.625  \\
+median\_nose\_lateral\_displacement       & -0.112   & 0.009   & -0.083 & 0.137   & -0.061  & 0.358  \\
+median\_limb\_duty\_factor                & -0.101   & 0.018   & -0.093 & 0.095   & -0.103  & 0.123  \\
+aABC\_nongait\_median                     & -0.091   & 0.033   & -0.093 & 0.096   & -0.065  & 0.330  \\
+dB\_standard\_deviation                   & 0.083    & 0.051   & 0.070  & 0.205   & 0.036   & 0.590  \\
+dB\_max                                   & 0.076    & 0.074   & 0.065  & 0.242   & -0.018  & 0.784  \\
+corner\_time\_secs                        & -0.066   & 0.125   & 0.032  & 0.563   & -0.166  & 0.012  \\
+median\_angular\_velocity                 & 0.040    & 0.350   & 0.001  & 0.990   & 0.163   & 0.014  \\
+dB\_nongait\_standard\_deviation          & -0.037   & 0.383   & -0.122 & 0.029   & 0.098   & 0.143  \\
+aABC\_nongait\_min                        & 0.035    & 0.409   & 0.030  & 0.586   & 0.039   & 0.562  \\
+dAC\_median                               & 0.034    & 0.432   & -0.023 & 0.673   & 0.202   & 0.002  \\
+center\_time\_secs                        & -0.028   & 0.510   & -0.075 & 0.179   & 0.007   & 0.919  \\
+angular\_velocity\_stdev                  & 0.023    & 0.584   & 0.040  & 0.476   & 0.005   & 0.943  \\
+stride\_count                             & -0.023   & 0.596   & 0.022  & 0.697   & 0.032   & 0.632  \\
+dB\_nongait\_max                          & 0.014    & 0.736   & -0.007 & 0.893   & 0.042   & 0.527  \\
+periphery\_time\_secs                     & -0.013   & 0.764   & 0.050  & 0.374   & -0.097  & 0.146 
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\caption {FI Item Correlation with FI score}  
+\begin{tabular}{{l|ll|ll|ll}}
+\hline
+Features                     & All mice & pvalue & Males  & pvalue & Females & pvalue \\
+\hline
+Alopecia                     & 0.137    & 0.001  & 0.096  & 0.084  & 0.422   & 0.000  \\
+Loss of fur colour           & 0.451    & 0.000  & 0.469  & 0.000  & 0.191   & 0.004  \\
+Coat condition               & 0.633    & 0.000  & 0.687  & 0.000  & 0.414   & 0.000  \\
+Tremor                       & 0.149    & 0.000  & 0.071  & 0.204  & 0.287   & 0.000  \\
+Tail stiffening              & 0.105    & 0.014  & 0.108  & 0.052  &         &        \\
+Vision loss (Visual Placing) & 0.113    & 0.008  & 0.122  & 0.028  & 0.229   & 0.000  \\
+Breathing rate/depth         & 0.241    & 0.000  & 0.243  & 0.000  & 0.140   & 0.036  \\
+Gait disorders               & 0.619    & 0.000  & 0.614  & 0.000  & 0.516   & 0.000  \\
+Body condition               & 0.454    & 0.000  & 0.452  & 0.000  & 0.356   & 0.000  \\
+Eye discharge/swelling       & 0.045    & 0.287  & 0.017  & 0.758  & 0.096   & 0.148  \\
+Piloerection                 & 0.697    & 0.000  & 0.647  & 0.000  & 0.719   & 0.000  \\
+Menace reflex                & -0.032   & 0.446  & -0.021 & 0.711  & 0.045   & 0.495  \\
+Cataracts                    & -0.036   & 0.401  & -0.058 & 0.294  & 0.004   & 0.953  \\
+Malocclusions                & 0.028    & 0.508  & 0.044  & 0.426  & -0.012  & 0.856  \\
+Distended abdomen            & 0.490    & 0.000  & 0.443  & 0.000  & 0.496   & 0.000  \\
+Kyphosis                     & 0.658    & 0.000  & 0.643  & 0.000  & 0.595   & 0.000  \\
+Tumours                      & 0.233    & 0.000  & 0.204  & 0.000  & 0.249   & 0.000  \\
+Vestibular disturbance       & 0.286    & 0.000  & 0.255  & 0.000  & 0.298   & 0.000  \\
+Microphthalmia               & -0.007   & 0.861  & 0.009  & 0.877  & -0.031  & 0.644  \\
+Righting Reflex              & 0.255    & 0.000  & 0.240  & 0.000  & 0.271   & 0.000  \\
+Dermatitis                   & 0.071    & 0.097  & 0.098  & 0.078  & 0.068   & 0.305  \\
+Loss of whiskers             & 0.326    & 0.000  & 0.396  & 0.000  & 0.374   & 0.000  \\
+Corneal opacity              & -0.010   & 0.816  & 0.007  & 0.905  & 0.005   & 0.944  \\
+Nasal discharge              &          &        &        &        &         &        \\
+Rectal prolapse              &          &        &        &        &         &        \\
+Vaginal/uterine/             &          &        &        &        &         &        \\
+Diarrhea                     &          &        &        &        &         &       
+\end{tabular}
+\end{table}
+
+
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\multicolumn{1}{|c|}{Features} & \multicolumn{2}{c}{All Mice} & \multicolumn{2}{|c}{Males} & \multicolumn{2}{|c|}{Females} \\ 
+\cline{2-7}
+
+\multicolumn{1}{|c|}{} & Correlation & p-value & Correlation & p-value & Correlation & p-value \\
+\hline 
+ Alopecia                     & 0.137    & 0.001  & 0.096  & 0.084  & 0.422   & 0.000  \\
+Loss of fur colour           & 0.451    & 0.000  & 0.469  & 0.000  & 0.191   & 0.004  \\
+Coat condition               & 0.633    & 0.000  & 0.687  & 0.000  & 0.414   & 0.000  \\
+Tremor                       & 0.149    & 0.000  & 0.071  & 0.204  & 0.287   & 0.000  \\
+Tail stiffening              & 0.105    & 0.014  & 0.108  & 0.052  &         &        \\
+Vision loss (Visual Placing) & 0.113    & 0.008  & 0.122  & 0.028  & 0.229   & 0.000  \\
+Breathing rate/depth         & 0.241    & 0.000  & 0.243  & 0.000  & 0.140   & 0.036  \\
+Gait disorders               & 0.619    & 0.000  & 0.614  & 0.000  & 0.516   & 0.000  \\
+Body condition               & 0.454    & 0.000  & 0.452  & 0.000  & 0.356   & 0.000  \\
+Eye discharge/swelling       & 0.045    & 0.287  & 0.017  & 0.758  & 0.096   & 0.148  \\
+Piloerection                 & 0.697    & 0.000  & 0.647  & 0.000  & 0.719   & 0.000  \\
+Menace reflex                & -0.032   & 0.446  & -0.021 & 0.711  & 0.045   & 0.495  \\
+Cataracts                    & -0.036   & 0.401  & -0.058 & 0.294  & 0.004   & 0.953  \\
+Malocclusions                & 0.028    & 0.508  & 0.044  & 0.426  & -0.012  & 0.856  \\
+Distended abdomen            & 0.490    & 0.000  & 0.443  & 0.000  & 0.496   & 0.000  \\
+Kyphosis                     & 0.658    & 0.000  & 0.643  & 0.000  & 0.595   & 0.000  \\
+Tumours                      & 0.233    & 0.000  & 0.204  & 0.000  & 0.249   & 0.000  \\
+Vestibular disturbance       & 0.286    & 0.000  & 0.255  & 0.000  & 0.298   & 0.000  \\
+Microphthalmia               & -0.007   & 0.861  & 0.009  & 0.877  & -0.031  & 0.644  \\
+Righting Reflex              & 0.255    & 0.000  & 0.240  & 0.000  & 0.271   & 0.000  \\
+Dermatitis                   & 0.071    & 0.097  & 0.098  & 0.078  & 0.068   & 0.305  \\
+Loss of whiskers             & 0.326    & 0.000  & 0.396  & 0.000  & 0.374   & 0.000  \\
+Corneal opacity              & -0.010   & 0.816  & 0.007  & 0.905  & 0.005   & 0.944  \\
+Nasal discharge              &          &        &        &        &         &        \\
+Rectal prolapse              &          &        &        &        &         &        \\
+Vaginal/uterine/             &          &        &        &        &         &        \\
+Diarrhea                     &          &        &        &        &         &       \\
+\hline
+\end{tabular}
+\end{table}
+
+\end{document}

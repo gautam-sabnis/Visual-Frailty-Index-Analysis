@@ -323,7 +323,7 @@ predictor <- iml::Predictor$new(
   y = Ytrain, 
   predict.fun = Yhat
   )
-interact <- Interaction$new(predictor)
+interact <- iml::Interaction$new(predictor)
 tmp <- data.frame(interact$results)
 colnames(tmp) <- c('Feature','Interaction')
 tmp$Feature <- as.factor(tmp$Feature) 

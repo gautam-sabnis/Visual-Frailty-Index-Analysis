@@ -1,0 +1,273 @@
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,enumerate,natbib,color,ifthen}
+\usepackage{xargs}
+%\usepackage{calrsfs}
+%\usepackage[notref,notcite]{showkeys}  %  comment out for final version
+%\renewcommand*\showkeyslabelformat[1]{\fbox{\normalfont\scriptsize\sffamily#1}}   % for showkeys
+\usepackage[textwidth=4cm, textsize=footnotesize]{todonotes}
+\setlength{\marginparwidth}{4cm}    %  this goes with todonotes
+\usepackage[latin1]{inputenc}
+
+
+
+\usepackage{adjustbox}
+\usepackage{multicol,booktabs,colortbl,tabularx}
+\usepackage{caption,subcaption}
+\usepackage{float}
+%\usepackage[caption = false]{subfig}
+\usepackage{graphicx}
+
+\usepackage{aliascnt,bbm}
+%\usepackage{algorithmicx}
+
+%\usepackage{showlabels}
+%\usepackage[latin1]{inputenc}
+\renewcommand{\baselinestretch}{1.2}
+
+%\topmargin -0.5cm
+%\oddsidemargin -0.25cm
+%\evensidemargin -0.25cm
+%
+%\textheight 9in
+\textwidth 5.6in
+
+
+
+% NOTATIONS
+%%%%%%%%%%%%%
+%%%%%%%%%%%%%
+% Ensembles
+\def\nset{{\mathbb{N}}}
+\def\rset{\mathbb R}
+\def\zset{\mathbb Z}
+\def\qset{\mathbb Q}
+\def\eqsp{\;}
+
+
+\newcommand{\eg}{e.g.}
+\newcommand{\ie}{i.e.}
+\newcommand{\wrt}{with respect to}
+\newcommand{\as}{\text{a.s.}}
+\newcommand{\pscal}[2]{\left\langle#1,#2\right\rangle}
+
+\newcommand{\un}{\ensuremath{\mathbbm{1}}}
+\newcommand{\eqdef}{\ensuremath{\stackrel{\mathrm{def}}{=}}}
+\newcommand{\eps}{\varepsilon}
+
+
+\def\Eset{\mathsf{E}}
+\def\Xset{\mathcal{Z}} % Espace d 'etat
+\def\Zset{\mathcal{Z}} % Espace d 'etat
+\def\Vset{\mathsf{V}} % Espace d 'etat
+\def\Yset{\mathsf{Y}} % Espace d 'etat
+\def\Xsigma{\mathcal{X}} % tribu sur X
+\def\Tsigma{\mathcal{B}(\Theta)} % tribu sut Theta
+\def\F{\mathcal{F}} % filtration
+\def\B{\mathcal{B}} % filtration
+\def\cB{\mathsf{B}} % filtration
+\def\barB{\overline{B}} % filtration
+\def\e{\mathcal{E}}
+\def\dist{\textsf{d}}
+\def\q{\mathsf{q}}
+\def\E{\mathbb{E}}
+\def\N{\mathcal{N}}
+\def\M{\mathcal{M}}
+\def\m{\mathsf{m}}
+\def\Mt{\mathcal{M}_{2,\textsf{w}}^{(0)}}
+\def\G{\mathcal{G}}
+\def\D{\mathcal{D}}
+\def\A{\mathcal{A}}
+\def\bV{\mathcal{V}}
+\def\cV{\check{\mathcal{V}}}
+\def\H{\mathcal{H}}
+\def\cov{\mathbb{C}\mbox{ov}}
+\def\calK{\mathcal{K}}
+\newcommandx\sequence[3][2=t,3=\zset]
+{\ifthenelse{\equal{#3}{}}{\ensuremath{\{ #1_{#2}\}}}{\ensuremath{\{ #1_{#2}, \eqsp #2 \in #3 \}}}}
+
+%\DeclareMathAlphabet{\pazocal}{OMS}{zplm}{m}{n}
+\newcommand{\Sa}{\mathcal{S}}
+%\newcommand{\Sb}{\pazocal{S}}
+
+
+
+
+\def\PP{\mathbb{P}} % proba
+\newcommand{\CPP}[3][]
+{\ifthenelse{\equal{#1}{}}{{\mathbb P}\left(\left. #2 \, \right| #3 \right)}{{\mathbb P}_{#1}\left(\left. #2 \, \right | #3 \right)}}
+\def\PE{\mathbb{E}} % esperance
+\newcommand{\CPE}[3][]
+{\ifthenelse{\equal{#1}{}}{{\mathbb E}\left[\left. #2 \, \right| #3 \right]}{{\mathbb E}_{#1}\left[\left. #2 \, \right | #3 \right]}}
+
+\def\bPP{\overline{\mathbb{P}}} % proba sur espace double
+\def\bPE{\overline{\mathbb{E}}} % esperance sur espace double
+\def\cPP{\check{\mathbb{P}}} % proba sur espace quadruple
+\def\cPE{\check{\mathbb{E}}} % esperance sur espace quadruple
+\def\cP{\check{P}} % proba
+\def\wtilde{\widetilde} % proba
+
+
+
+\def\lyap{\omega}
+\def\W{\mathcal{W}}
+\def\K{\mathcal{K}}
+\def\L{\mathcal{L}} % espace des fonctions
+\def\Vs{V_\star}
+\def\V{\mathbb{V}}
+\def\ns{n_\star}
+\def\tv{\mathrm{tv}}
+\def\tvs{\mathrm{tv(s)}}
+\def\tauout{\stackrel{\leftarrow}{\tau}} % temps de sortie
+\def\compact{\mathsf{K}}  % compact
+\def\Cset{\mathcal{C}} % Petite set
+\def\Dset{\mathcal{D}} % Generic set
+\newcommand{\dlim}{\ensuremath{\stackrel{\mathcal{D}}{\longrightarrow}}}
+\newcommand{\plim}[1]{\ensuremath{\stackrel{\mathrm{P}_{#1}}{\longrightarrow}}}
+\newcommand{\aslim}{\ensuremath{\stackrel{\text{a.s.}}{\longrightarrow}}}
+\newcommand\Plim[1]{\mathbb{Q}_{#1}}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\normoff}[1]{\left\Vert#1\right\Vert_{1,\textsf{off}}}
+\newcommand{\normfro}[1]{\left\Vert#1\right\Vert_{\textsf{F}}}
+
+\newcommand{\tnorm}[1]{\left\vert\!\left\vert\!\left\vert#1\right\vert\!\right\vert\!\right\vert}
+\newcommand{\nnorm}[1]{\left\Vert#1\right\Vert_2}
+\newcommand{\inte}[1]{\stackrel{\circ}{#1}}
+
+
+\def\Rg{\mathsf{Rg}}
+\def\barlambda{\underline{\Lambda}}
+\def\Mb{\mathcal{M}_\textsf{b}}
+\def\b{\textsf{b}}
+\def\piq{\textsf{q}}
+\def\I{\textsf{I}}
+\def\t{\textsf{T}}
+\def\w{\textsf{w}}
+\def\c{\textsf{c}}
+\def\sp{\textsf{sp}}
+\def\deg{\textsf{deg}}
+\def\Prox{\operatorname{Prox}}
+\def\Proxj{\textsf{Prox}^{[j]}}
+\def \thetagl{\hat\theta_{\textsf{gl}}}
+\def \thetalasso{\hat\theta_{\textsf{lasso}}}
+\def\vec{\textsf{Vec}}
+\def\mat{\textsf{Mat}}
+\def\r{\textsf{r}}
+
+
+\usepackage{bm}%bold matH
+\def\bzero{{\bf 0}}
+
+
+
+
+
+
+
+% DIALOGUES ENTRE AUTEURS
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand{\comment}[2]{\begin{quote}\color{#1}\begin{sffamily} #2 \end{sffamily}\color{black}\end{quote}}
+%\newcommand{\note}[2]{\marginpar{\parbox[t]{\noteWidth}{\raggedright\textcolor{blue}{\tiny{#2}} \textcolor{red}{\tiny{#1}}}}}
+%
+%\def\yves{blue}
+%\def\eric{red}
+%\newlength{\noteWidth}
+%\setlength{\noteWidth}{.6in}
+%\newcommand{\yves}[1]{\todo[color=green!20]{{\bf Y:} #1}}
+%\newcommand{\anwesha}[1]{\todo[color=blue!20]{{\bf A:} #1}}
+
+
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{assumption}{H\hspace{-3pt}}
+\newtheorem{assumptionB}{B\hspace{-3pt}}
+\newtheorem{assumptionC}{C\hspace{-3pt}}
+\newtheorem{problem}{P}
+
+
+\newaliascnt{proposition}{theorem}
+\newtheorem{proposition}[proposition]{Proposition}
+\aliascntresetthe{proposition}
+
+\newaliascnt{lemma}{theorem}
+\newtheorem{lemma}[lemma]{Lemma}
+\aliascntresetthe{lemma}
+\newaliascnt{corollary}{theorem}
+\newtheorem{corollary}[corollary]{Corollary}
+\aliascntresetthe{corollary}
+
+
+ \newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{hypothese}{Hypothesis}
+\newtheorem{fact}[theorem]{Fact}
+
+
+\theoremstyle{definition}
+\newaliascnt{definition}{theorem}
+\newtheorem{definition}[definition]{Definition}
+\aliascntresetthe{definition}
+
+%\newaliascnt{algorithm}{theorem}             % uncomment these 3 lines and comment line 90 if dont want float
+%\newtheorem{algorithm}[algorithm]{Algorithm}
+%\aliascntresetthe{algorithm}
+\newtheorem{algorithm}{Algorithm}
+
+\newaliascnt{remark}{theorem}
+\newtheorem{remark}[remark]{Remark}
+\aliascntresetthe{remark}
+
+\newaliascnt{example}{theorem}
+\newtheorem{example}[example]{Example}
+\aliascntresetthe{example}
+
+
+
+\providecommand*{\definitionautorefname}{Definition}
+\providecommand*{\lemmaautorefname}{Lemma}
+\renewcommand*{\subsectionautorefname}{Section}
+\renewcommand*{\subsubsectionautorefname}{Section}
+\providecommand*{\exampleautorefname}{Example}
+\providecommand*{\propositionautorefname}{Proposition}
+\providecommand*{\procautorefname}{Procedure}
+\providecommand*{\exerciseautorefname}{Exercise}
+\providecommand*{\corollaryautorefname}{Corollary}
+\providecommand*{\remarkautorefname}{Remark}
+\providecommand*{\algorithmautorefname}{Algorithm}
+
+\providecommand*{\assumptionautorefname}{H\hspace*{-2.5pt}}  %hspace is stretchable, but \! is not and \!\! is too much
+\providecommand*{\problemautorefname}{(P)\hspace*{-2.5pt}}  %hspace is stretchable, but \! is not and \!\! is too much
+
+
+\newcommand{\coint}[1]{\left[#1\right)}
+\newcommand{\ocint}[1]{\left(#1\right]}
+\newcommand{\ooint}[1]{\left(#1\right)}
+\newcommand{\ccint}[1]{\left[#1\right]}
+
+\def\rmd{\mathrm{d}}
+\def\rme{\mathrm{e}}
+\def\PG{\operatorname{PG}}
+\def\1{\mathbbm{1}}
+\def\gauss{\operatorname{N}}
+\def\bU{\mathbf{U}}
+\def\bY{\mathbf{Y}}
+\def\bu{\mathbf{u}}
+\def\bW{\mathbf{W}}
+\def\bw{\mathbf{w}}
+\def\stdnor{\mathbf{N}}
+\def\iid{i.i.d.}
+\newcommand{\ball}[2]{\mathcal{B}(#1,#2)} 
+
+
+%From Rahul
+\newcommand{\sbt}{\mbox{subject to}}
+\DeclareMathOperator*{\mini}{minimize}
+\DeclareMathOperator*{\maxi}{maximize}
+%\def\argmin{\operatorname{Argmin}}
+\DeclareMathOperator*{\argmin}{{\textsf{Argmin}}}
+
+
+
+
+
