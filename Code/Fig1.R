@@ -148,7 +148,7 @@ labs(x='Model',y='Metric') + theme_bw(base_size=28) +
 facet_wrap(~Metric, scales='free',labeller=label_parsed) + theme(axis.text.x = element_text(size=21), axis.text.y = element_text(size=21), axis.title.x = element_text(size = 21), axis.title.y=element_text(size=21))
 
 p1|p2
-dev.print(pdf,'Temp3/1B.pdf',width=19.45,height=3.67)
+dev.print(pdf,'Temp4/1B.pdf',width=19.45,height=4.0)
 
 
 ####1C&D#####
@@ -303,7 +303,8 @@ vi_list <- list()
 modelGRF60 <- grf::quantile_forest(Xtrain, Ytrain, quantiles = quantiles[1], 
 	honesty=FALSE)
 vi_list[[1]] <- grf::variable_importance(modelGRF60)
-modelGRF60 <- grf::regression_forest(Xtrain, Ytrain, tune.parameters = 'all',honesty=FALSE)
+#modelGRF60 <- grf::regression_forest(Xtrain, Ytrain, tune.parameters = 'all',honesty=FALSE)
+modelGRF60 <- grf::quantile_forest(Xtrain, Ytrain, quantiles = quantiles[2], honesty=FALSE)
 vi_list[[2]] <- grf::variable_importance(modelGRF60)
 modelGRF60 <- grf::quantile_forest(Xtrain, Ytrain, quantiles = quantiles[3], 
 	honesty=FALSE)
@@ -318,10 +319,10 @@ df.tmp$Quantile <- factor(df.tmp$Quantile, levels = c('Q025','M','Q975'))
 ggplot(df.tmp, aes(x=feature,y=importance,fill=Quantile)) + 
 geom_bar(stat='identity',position='dodge') +  
 theme_bw(base_size=18) + labs(x = 'Feature', y = 'Importance') + 
-scale_fill_manual(name = "Quantile", values = c('#e41a1c','#377eb8','#4daf4a'),
-	labels = expression(Q[.025], Q[.50], Q[.975])) + 
+scale_fill_manual(name = "Quantile", values = c('#4daf4a','#377eb8','#e41a1c'),
+	labels = expression(Q[1], M, Q[3])) + 
 theme(axis.text.x=element_text(angle=90,vjust=0.5,hjust=1)) + theme(axis.text.x = element_text(size=18), axis.text.y = element_text(size=18), axis.title.x = element_text(size = 18), axis.title.y=element_text(size=18))
-dev.print(pdf,'Temp3/2A.pdf', width=16,height=5)
+dev.print(pdf,'Temp4/2A.pdf', width=16,height=5)
 
 ftrs <- c(30,36,34,16,32)
 k <- 50 #A numeric scalar that specifies the number of intervals into which the predictor range is 
@@ -346,8 +347,8 @@ lapply(seq(ftrs), function(f) {
 	df.ALE.melt60$variable <- factor(df.ALE.melt60$variable, levels=c("Q025","Median","Q975"))
 
 	assign(paste0("p",f), ggplot(df.ALE.melt60, aes(x = x, y = value, col = variable)) + geom_point() + geom_line() + 
-	theme_bw(base_size=18) + scale_color_manual(name = "Quantile", values = c('#e41a1c','#377eb8','#4daf4a'),
-	labels = expression(Q[.025], Q[.50], Q[.975])) + labs(x = paste0(feature), y = 'ALE') + 
+	theme_bw(base_size=18) + scale_color_manual(name = "Quantile", values = c('#4daf4a','#377eb8','#e41a1c'),
+	labels = expression(Q[1], M, Q[3])) + labs(x = paste0(feature), y = 'ALE') + 
 	theme(legend.position='none') + theme(axis.text.x = element_text(size=18), axis.text.y = element_text(size=18), axis.title.x = element_text(size = 18), axis.title.y=element_text(size=18)), 
 	inherits=TRUE);
 	setTxtProgressBar(pb, f)
@@ -355,7 +356,7 @@ lapply(seq(ftrs), function(f) {
 })
 
 p1|p2|p3|p4|p5
-dev.print(pdf,'Temp3/2B.pdf', width=15,height=2.9)
+dev.print(pdf,'Temp4/2B.pdf', width=15,height=2.9)
 
 modelGRF60 <- grf::quantile_forest(Xtrain, Ytrain, quantiles = quantiles[2], 
 		honesty=FALSE)
