@@ -1,0 +1,97 @@
+\documentclass[8pt]{beamer}
+%\usetheme{Boadilla}
+\usetheme{simple}
+%\usepackage{natbib}
+%\usepackage[colorlinks=true,linkcolor=blue]{hyperref}%
+%\usepackage[backend=biber, uniquename=false, maxbibnames=99, maxcitenames=2, citestyle=authoryear, bibstyle=authoryear]{biblatex}
+
+%\addbibresource{refs.bib}
+\usepackage{natbib}
+\usepackage{hyperref}
+%\usepackage[nameinlink,noabbrev]{cleveref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=red,
+    filecolor=red,      
+    urlcolor=red,
+    citecolor=blue,
+    linktoc=page
+}
+
+%\usepackage{tabularx,booktabs}
+%\usepackage[scaled=0.92]{PTSans}
+
+%\usefonttheme{default}
+
+%\input{preamble/preamble.tex}
+%\input{preamble/preamble_math.tex}
+
+%\usepackage{enumitem}
+
+%\usecolortheme{dove} 
+%\usepackage{caption,subcaption,xparse,subcaption,graphicx, xcolor}
+%\usepackage{amsmath,amssymb,mathtools,bm}
+%\usepackage[outline]{contour}
+%\usepackage{natbib}
+%\usepackage{mwe}
+\usepackage{caption,subcaption}
+\usepackage{bm}
+%\setbeamertemplate{itemize items}[default]
+
+%\makeatletter
+%\setbeamertemplate{headline}{%
+%    \begin{beamercolorbox}[ht=2.25ex,dp=3.75ex]{section in head/foot}
+%        \insertnavigation{\paperwidth}
+%    \end{beamercolorbox}%
+%}%
+\makeatother
+
+%\title{Gait analysis of KOMP lines}
+%\title{Mouse Personalities}
+%\author{CS-SA Computational Retreat \\ Gautam Sabnis \\ Kumar Lab}
+\title{FI Meeting}
+\date{\today}
+\logo{\includegraphics[height=1cm]{jax-logo.png}}
+%\logo{\includegraphics[width=.1\textwidth]{jax-logo.png}\hspace*{.88\paperwidth}\vspace*{.0001\paperwidth}}
+
+\begin{document}
+\maketitle
+
+
+\begin{frame}
+\begin{table}
+\centering
+\begin{tabular}{|c|c|}
+\hline
+Batch & \# of Animals \\
+\hline
+1 & 240  \\ 
+2 & 211 \\
+3 & 396 \\ 
+\hline
+
+\end{tabular}
+\end{table}
+
+\begin{eqnarray*}
+y_{i} & = \mu + \bm{x}_{i, \text{fixed}}^T\bm{\beta} + u_{\text{tester}[i]} + u_{\text{batch}[i]} + \epsilon_i, \quad 1 \le i \le n \\ 
+& \epsilon_i \sim N(0, {\color{blue}{\sigma^2}}) \\ 
+& {\color{blue}{u_{\text{tester}}}} \sim N(0, {\color{blue}{\tau_{\text{tester}}^2}}) \\
+& {\color{blue}{u_{\text{batch}}}} \sim N(0, {\color{blue}{\gamma_{\text{batch}}^2}}) \\
+\end{eqnarray*}
+
+\begin{itemize}
+    \item $(\hat\sigma, \hat\tau_{\text{tester}}, \hat\gamma_{\text{batch}}) =  (2.17,0.98,0.84)$
+
+    \item $(u_{\tiny{\mbox{tester}[1]}}, u_{\tiny{\mbox{tester}[2]}}, u_{\tiny{\mbox{tester}[3]}}, u_{\tiny{\mbox{tester}[4]}}) = (-1.2, 0.54, -0.28,0.84)$
+
+    \item $(u_{\tiny\mbox{batch}[1]}, u_{\tiny\mbox{batch}[2]}, u_{\tiny\mbox{batch}[3]}) = (-0.56, -0.37, 0.94)$
+\end{itemize}
+\end{frame}
+
+
+
+
+
+
+\end{document}

@@ -98,7 +98,7 @@ theme_bw(base_size = 18) + theme(legend.position = 'none')
 set.seed(1234)
 nsim <- 50
 quantiles <- c(0.5) #seq(0.1,0.9,length=9)
-help <- rep(1:3,c(251,100,100)) #since length(unique(df$MouseID)) = 403
+help <- rep(1:3,c(256,100,100)) #since length(unique(df$MouseID)) = 403
 splits <- lapply(seq(nsim), function(x) sample(help))
 #metrics <- data.frame(matrix(0,nrow=nsim,ncol=6))
 MAE <- data.frame(matrix(0,nrow=nsim,ncol=4))

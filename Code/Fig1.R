@@ -71,7 +71,7 @@ levels(df$Tester) <- vapply(1:4, function(x) paste0('Scorer',x), character(1))
 df$Sex <- as.factor(ifelse(df$Sex == 'Male', -1, 1)) 
 
 #Adjust for the tester effect
-mod.lmm <- lmer(score ~ (1|Tester), data = df) 
+mod.lmm <- lmer(score ~ Sex + Weight + (1|Tester), data = df) 
 df$score <- ifelse(df$Tester == 'Scorer1', df$score - ranef(mod.lmm)$Tester[1,],
 	ifelse(df$Tester == 'Scorer2', df$score - ranef(mod.lmm)$Tester[2,],
 	ifelse(df$Tester == 'Scorer3', df$score - ranef(mod.lmm)$Tester[3,], 
